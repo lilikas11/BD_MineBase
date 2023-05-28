@@ -71,7 +71,7 @@ CREATE TABLE Item (
 GO
 
 CREATE TABLE Mob(
-	[ID] [int] NOT NULL PRIMARY KEY,
+	[ID] [int] identity(1,1) PRIMARY KEY,
 	[Nome] [varchar](32) NOT NULL,
 	[Personalidade] [varchar](16) NOT NULL,
 	[ID_Bioma][int] REFERENCES Bioma([ID]),
@@ -98,6 +98,13 @@ CREATE TABLE Bloco(
 )
 GO
 
+CREATE TABLE Villager(
+	[ID_Mob][int] NOT NULL REFERENCES Mob([ID]) PRIMARY KEY,
+	[Trabalho][varchar](32) NOT NULL,
+	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
+)
+GO
+
 CREATE TABLE Aquisicao(
 	[ID][int] NOT NULL PRIMARY KEY,
 	[ID_Personagem][int] NOT NULL REFERENCES Personagem([ID]),
@@ -105,9 +112,3 @@ CREATE TABLE Aquisicao(
 )
 GO
 
-CREATE TABLE Villager(
-	[ID_Mob][int] NOT NULL REFERENCES Mob([ID]) PRIMARY KEY,
-	[Trabalho][varchar](32) NOT NULL,
-	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
-)
-GO
