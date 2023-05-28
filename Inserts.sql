@@ -105,6 +105,7 @@ INSERT INTO TipoItem(ID,Nome) VALUES
 (78, 'Poção de Invisibilidade'),
 (79, 'Osso'),
 (80, 'Lã')
+(81, 'Esmeralda')
 
 INSERT INTO Arma (ID_TipoItem, Durabilidade, Dano) VALUES
 	 (1, 250, 7),
@@ -192,14 +193,22 @@ INSERT INTO ItemComum (ID_TipoItem) VALUES
 (59),
 (60),
 (79),
-(80)
+(80),
+(81)
 
-INSERT INTO Item(ID, ID_TipoItem, ID_Personagem) VALUES
-	(1, 72, 1),
-	(2, 56, 1),
-	(3, 5, 1),
-	(4, 6, 2),
-	(5, 23, 2)
+INSERT INTO Item(ID_TipoItem, ID_Personagem) VALUES
+	(72, 1),
+	(56, 1),
+	(5, 1),
+	(6, 2),
+	(23, 2),
+	(81, 1),
+	(81, 1),
+	(81, 1),
+	(81, 1),
+	(81, 1),
+	(81, 1),
+	(81, 1),
 
 INSERT INTO Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
 ('Axalote', 'Passiva', 1, 2, 2, 2, NULL, NULL),
