@@ -91,7 +91,6 @@ GO
 CREATE TABLE Bloco(
 	[ID] [int] NOT NULL PRIMARY KEY,
 	[Nome] [varchar](32) NOT NULL,
-	[Tipo] [varchar](16),
 	[Dureza] [float] NOT NULL,
 	[ID_Bioma][int] REFERENCES Bioma([ID]),
 	[ID_Personagem][int] REFERENCES Personagem([ID]),
@@ -99,16 +98,16 @@ CREATE TABLE Bloco(
 )
 GO
 
-CREATE TABLE Villager(
-	[ID_Mob][int] NOT NULL REFERENCES Mob([ID]) PRIMARY KEY,
-	[Trabalho][varchar](32) NOT NULL,
-	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
-)
-GO
-
 CREATE TABLE Aquisicao(
 	[ID][int] NOT NULL PRIMARY KEY,
 	[ID_Personagem][int] NOT NULL REFERENCES Personagem([ID]),
 	[ID_Villager][int] NOT NULL REFERENCES Villager([ID_Mob]),
+)
+GO
+
+CREATE TABLE Villager(
+	[ID_Mob][int] NOT NULL REFERENCES Mob([ID]) PRIMARY KEY,
+	[Trabalho][varchar](32) NOT NULL,
+	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
 )
 GO
