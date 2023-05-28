@@ -6,16 +6,16 @@ GO
 
 INSERT INTO Jogador(ID, Nome, Senha, Data_Nascimento, Email, Idioma)
 VALUES
-  (1, 'Lia', 'lia1234', 02/01/2003, 'lia@gmail.com', 'portugues')
+  (1, 'Lia', 'lia1234', 02/01/2003, 'lia@gmail.com', 'portugues'),
   (2, 'Lili', 'lili1234', 02/01/2003, 'lili@gmail.com', 'portugues')
 
 INSERT INTO Mundo(Seed, Nome, Dificuldade) VALUES
 	(1234, 'DETI', 'Dificil')
 
 INSERT INTO Personagem(ID, Nome, ID_Jogador, Seed_Mundo) VALUES
-	(1, 'P1',1, 1234)
-	(2, 'P2',2, 1234)
-	(3, 'P3,1, NULL)
+	(1, 'P1',1, 1234),
+	(2, 'P2',2, 1234),
+	(3, 'P3',1, NULL)
 	
 
 INSERT INTO Bioma (ID, Seed_Mundo, Nome) VALUES
@@ -110,7 +110,7 @@ INSERT INTO Arma (ID_TipoItem, Durabilidade, Dano) VALUES
 	 (1, 250, 7),
   (2, 384, 5),
   (5, 1561, 10),
-  (6, 384, 8);
+  (6, 384, 8),
   (61, 250, 3),
   (62, 1700, 5),
   (63, 700, 2)
@@ -131,13 +131,13 @@ INSERT INTO Comida (ID_TipoItem, Fome) VALUES
 	(66, 2)
 
 INSERT INTO Pocao (ID_TipoItem, Tempo, Efeito) VALUES
-	(71, 45, 'Restaura vida')
-	(72, 180, 'Respirar debaixo de agua')
-	(73, 180, 'Aumento da velocidade')
-	(74, 180, 'Imunidade ao dano de fogo')
-	(75, 0, 'Restaura vida')
-	(76, 180, 'Ilumina todo a nivel de luz')
-	(77, 180, 'Aumento de dano corpo a corpo')
+	(71, 45, 'Restaura vida'),
+	(72, 180, 'Respirar debaixo de agua'),
+	(73, 180, 'Aumento da velocidade'),
+	(74, 180, 'Imunidade ao dano de fogo'),
+	(75, 0, 'Restaura vida'),
+	(76, 180, 'Ilumina todo a nivel de luz'),
+	(77, 180, 'Aumento de dano corpo a corpo'),
 	(78, 180, 'Modelo da personagem desaparece')
 
 INSERT INTO ItemComum (ID_TipoItem) VALUES
@@ -195,10 +195,10 @@ INSERT INTO ItemComum (ID_TipoItem) VALUES
 (80)
 
 INSERT INTO Item(ID, ID_TipoItem, ID_Personagem) VALUES
-	(1, 72, 1)
-	(2, 56, 1)
-	(3, 5, 1)
-	(4, 6, 2)
+	(1, 72, 1),
+	(2, 56, 1),
+	(3, 5, 1),
+	(4, 6, 2),
 	(5, 23, 2)
 
 INSERT INTO Mob (ID, Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
@@ -296,11 +296,11 @@ INSERT INTO MobComum(ID_mob) VALUES
 (43)
 
 INSERT INTO Villager( ID_Mob, Trabalho, ID_TipoItem) VALUES
-	(2, 'Desempregado', 56)
-	(44, 'Cartógrafo', 45)
-	(45, 'Fazendeiro', 17)
-	(46, 'Pedreiro', 2)
-	(47, 'Bibliotecário', 12)
+	(2, 'Desempregado', 56),
+	(44, 'Cartógrafo', 45),
+	(45, 'Fazendeiro', 17),
+	(46, 'Pedreiro', 2),
+	(47, 'Bibliotecário', 12),
 	(48, 'Armeiro', 1)
 
 
