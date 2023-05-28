@@ -64,7 +64,7 @@ GO
 
 
 CREATE TABLE Item (
-	[ID][int] NOT NULL PRIMARY KEY,
+	[ID][int] identity(1,1) PRIMARY KEY,
 	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID]),
 	[ID_Personagem][int] NOT NULL REFERENCES Personagem([ID])
 )
