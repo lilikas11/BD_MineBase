@@ -101,6 +101,8 @@ CREATE TABLE Bloco(
 GO
 
 CREATE TABLE Villager(
+	-- Como criar um novo villager:
+	-- EXEC dbo.create_villager_with_mob <ID_Mob>, <Trabalho>, <ID_tipoItem>;
 	[ID_Mob][int] NOT NULL REFERENCES Mob([ID]) PRIMARY KEY,
 	[Trabalho][varchar](32) NOT NULL,
 	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
