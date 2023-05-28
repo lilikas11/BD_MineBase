@@ -46,7 +46,7 @@ INSERT INTO TipoItem(ID,Nome) VALUES
 (19, 'Balde de Água'),
 (20, 'Balde de Lava'),
 (21, 'Olho de aranha'),
-(22, 'Vara de madeira''),
+(22, 'Vara de madeira'),
 (23, 'Pó de Pedra Luminosa'),
 (24, 'Escudo'),
 (25, 'Flecha Flamejante'),
@@ -113,10 +113,10 @@ INSERT INTO Arma (ID_TipoItem, Durabilidade, Dano) VALUES
   (6, 384, 8),
   (61, 250, 3),
   (62, 1700, 5),
-  (63, 700, 2)
-  (67, 100, 1)
-  (68, 238, 1)
-  (69, 60, 1)
+  (63, 700, 2),
+  (67, 100, 1),
+  (68, 238, 1),
+  (69, 60, 1),
   (70, null, 1)
 
 INSERT INTO Comida (ID_TipoItem, Fome) VALUES
