@@ -41,24 +41,24 @@ CREATE TABLE TipoItem(
 )
 
 CREATE TABLE Arma (
-	[ID_Item][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
+	[ID_TipoItem][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
 	[Durabilidade][int],
 	[Dano][int] NOT NULL
 )
 
 CREATE TABLE Comida (
-	[ID_Item][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
+	[ID_TipoItem][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
 	[Fome][int] NOT NULL
 )
 
 CREATE TABLE Pocao (
-	[ID_Item][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
+	[ID_TipoItem][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID]),
 	[Tempo][int] NOT NULL,
 	[Efeito][varchar](128)
 )
 
 CREATE TABLE ItemComum (
-	[ID_TipoItem][int] NOT NULL REFERENCES TipoItem([ID])
+	[ID_TipoItem][int] NOT NULL PRIMARY KEY REFERENCES TipoItem([ID])
 ) 
 GO
 
