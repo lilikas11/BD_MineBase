@@ -23,7 +23,7 @@ GO
 
 CREATE TABLE Personagem(
 	[ID][int] NOT NULL PRIMARY KEY,
-	[Nome][varchar](64) NOT NULL,
+	[Nome][varchar](64) NOT NULL UNIQUE,
 	[ID_Jogador][int] NOT NULL REFERENCES Jogador([ID]),
 	[Seed_Mundo][int] REFERENCES Mundo([Seed])
 )
