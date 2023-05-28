@@ -25,17 +25,17 @@ END;
 
 
 -- compra villager (esta atualiza os elementos)
--- EXEC dbo.Compra <id_personagem> , <id_villager>
-CREATE PROCEDURE EfetuaCompra(@id_personagem int, @id_villager int, @id_item int)
+-- EXEC dbo.EfetuaCompra <id_personagem> , <id_villager>
+CREATE PROCEDURE EfetuaCompra(@id_personagem int, @id_villager int)
 AS
 BEGIN
     -- Remove a esmeralda
-    DELETE FROM Item WHERE ID = @id_item;
+    DELETE FROM Item WHERE ID = (SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81);
 
     -- tipo item villager
     DECLARE @tipoItem int;
     SET @tipoItem = (SELECT ID_TipoItem FROM Villager WHERE ID_Mob = @id_villager);
 
-    INSERT INTO Item VALUES (47, @tipoItem, @id_personagem);
+    INSERT INTO Item VALUES (@tipoItem, @id_personagem);
 END
 GO
