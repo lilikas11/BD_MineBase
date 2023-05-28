@@ -201,55 +201,49 @@ INSERT INTO Item(ID, ID_TipoItem, ID_Personagem) VALUES
 	(4, 6, 2),
 	(5, 23, 2)
 
-INSERT INTO Mob (ID, Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
-(1, 'Axalote', 'Passiva', 1, 2, 2, 2, NULL, NULL),
-(2, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL),
-(3, 'Burro', 'Passiva', 1, 0, 0, 0, NULL, NULL),
-(4, 'Cavalo', 'Passiva', 1, 0, 0, 0, NULL, NULL),
-(5, 'Cavalo Esqueleto', 'Passiva', 1, 0, 0, 0, 79, NULL),
-(6, 'Coelho', 'Passiva', 1, 0, 0, 0, 41, NULL),
-(7, 'Galinha', 'Passiva', 1, 0, 0, 0, 6, NULL),
-(8, 'Gato', 'Passiva', 1, 3, 3, 3, NULL, NULL),
-(9, 'Golem de neve', 'Passiva', 1, 0, 0, 0, 48, NULL),
-(10, 'Mula', 'Passiva', 1, 0, 0, 0, NULL, NULL),
-(11, 'Morcego', 'Passiva', 1, 0, 0, 0, NULL, NULL),
-(12, 'Urso Polar', 'Neutra', 1, 4, 6, 9, NULL, NULL),
-(13, 'Ovelha', 'Passiva', 1, 0, 0, 0, 80, NULL),
-(14, 'Salmão', 'Passiva', 2, 0, 0, 0, 3, NULL),
-(15, 'Tartaruga', 'Passiva', 2, 0, 0, 0, 10, NULL),
-(16, 'Vaca', 'Passiva', 2, 0, 0, 0, 41, NULL),
-(17, 'Vendedor ambulante', 'Passiva', 2, 0, 0, 0, NULL, NULL),
-(18, 'Abelha', 'Neutral', 2, 2, 2, 3, 27, NULL),
-(19, 'Aranha', 'Neutral', 2, 2, 2, 3, 33, NULL),
-(20, 'Cabra', 'Neutral', 2, 1, 2, 3, 41, NULL),
-(21, 'Golfinho', 'Neutral', 3, 2.5, 3, 4, NULL, NULL),
-(22, 'Enderman', 'Neutral', 3, 4, 6, 10, 51, NULL),
-(23, 'Golem de Ferro', 'Neutral', 3, 8, 14, 21, 40, NULL),
-(24, 'Lhama', 'Neutral', 3, 1, 1, 1, 52, NULL),
-(25, 'Lobo', 'Neutral', 3, 3, 4, 6, NULL, NULL),
-(26, 'Panda', 'Neutral', 3, 4, 6, 9, 32, NULL),
-(27, 'Peixe-balão', 'Neutral', 3, 2, 2, 3, 3, NULL),
-(28, 'Afogado', 'Hostil', 3, 2, 3, 4, 57, NULL),
-(29, 'Aldeão zumbi', 'Hostil', 1, 2.5, 3, 4, 57, NULL),
-(30, 'Blaze', 'Hostil', 1, 5, 5, 5, 47, NULL),
-(31, 'Bruxa', 'Hostil', 1, 6, 6, 6, NULL, NULL),
-(32, 'Creeper', 'Hostil', 1, 22, 43, 64, 9, NULL),
-(33, 'Globo de Magma Grande', 'Hostil', 1, 4, 6, 9, 70, NULL),
-(34, 'Globo de Magma Médio', 'Hostil', 1, 3, 4, 6, 70, NULL),
-(35, 'Globo de Magma Pequeno', 'Hostil', 1, 2, 3, 4, 70, NULL),
-(36, 'Esqueleto', 'Hostil', 2, 2, 2, 3, 79, NULL),
-(37, 'Fantasma', 'Hostil', 2, 4, 6, 9, 54, NULL),
-(38, 'Guardião', 'Hostil', 2, 4, 6, 9, 46, NULL),
-(39, 'Silverfish', 'Hostil', 2, 1, 1, 1, 3, NULL),
-(40, 'Grande Slime', 'Hostil', 2, 3, 4, 6, 70, NULL),
-(41, 'Médio Slime', 'Hostil', 3, 2, 2, 3, 70, NULL),
-(42, 'Pequeno Slime', 'Hostil', 3, 0, 0, 0, 70, NULL),
-(43, 'Zombie', 'Hostil', 3, 2, 3, 4, 57, NULL),
-(44, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL),
-(45, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL),
-(46, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL),
-(47, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL),
-(48, 'Aldeão', 'Passiva', 1, 5, 5, 5, NULL, NULL);
+INSERT INTO Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
+('Axalote', 'Passiva', 1, 2, 2, 2, NULL, NULL),
+('Burro', 'Passiva', 1, 0, 0, 0, NULL, NULL),
+('Cavalo', 'Passiva', 1, 0, 0, 0, NULL, NULL),
+('Cavalo Esqueleto', 'Passiva', 1, 0, 0, 0, 79, NULL),
+('Coelho', 'Passiva', 1, 0, 0, 0, 41, NULL),
+('Galinha', 'Passiva', 1, 0, 0, 0, 6, NULL),
+('Gato', 'Passiva', 1, 3, 3, 3, NULL, NULL),
+('Golem de neve', 'Passiva', 1, 0, 0, 0, 48, NULL),
+('Mula', 'Passiva', 1, 0, 0, 0, NULL, NULL),
+('Morcego', 'Passiva', 1, 0, 0, 0, NULL, NULL),
+('Urso Polar', 'Neutra', 1, 4, 6, 9, NULL, NULL),
+('Ovelha', 'Passiva', 1, 0, 0, 0, 80, NULL),
+('Salmão', 'Passiva', 2, 0, 0, 0, 3, NULL),
+('Tartaruga', 'Passiva', 2, 0, 0, 0, 10, NULL),
+('Vaca', 'Passiva', 2, 0, 0, 0, 41, NULL),
+('Vendedor ambulante', 'Passiva', 2, 0, 0, 0, NULL, NULL),
+('Abelha', 'Neutral', 2, 2, 2, 3, 27, NULL),
+('Aranha', 'Neutral', 2, 2, 2, 3, 33, NULL),
+('Cabra', 'Neutral', 2, 1, 2, 3, 41, NULL),
+('Golfinho', 'Neutral', 3, 2.5, 3, 4, NULL, NULL),
+('Enderman', 'Neutral', 3, 4, 6, 10, 51, NULL),
+('Golem de Ferro', 'Neutral', 3, 8, 14, 21, 40, NULL),
+('Lhama', 'Neutral', 3, 1, 1, 1, 52, NULL),
+('Lobo', 'Neutral', 3, 3, 4, 6, NULL, NULL),
+('Panda', 'Neutral', 3, 4, 6, 9, 32, NULL),
+('Peixe-balão', 'Neutral', 3, 2, 2, 3, 3, NULL),
+('Afogado', 'Hostil', 3, 2, 3, 4, 57, NULL),
+('Aldeão zumbi', 'Hostil', 1, 2.5, 3, 4, 57, NULL),
+('Blaze', 'Hostil', 1, 5, 5, 5, 47, NULL),
+('Bruxa', 'Hostil', 1, 6, 6, 6, NULL, NULL),
+('Creeper', 'Hostil', 1, 22, 43, 64, 9, NULL),
+('Globo de Magma Grande', 'Hostil', 1, 4, 6, 9, 70, NULL),
+('Globo de Magma Médio', 'Hostil', 1, 3, 4, 6, 70, NULL),
+('Globo de Magma Pequeno', 'Hostil', 1, 2, 3, 4, 70, NULL),
+('Esqueleto', 'Hostil', 2, 2, 2, 3, 79, NULL),
+('Fantasma', 'Hostil', 2, 4, 6, 9, 54, NULL),
+('Guardião', 'Hostil', 2, 4, 6, 9, 46, NULL),
+('Silverfish', 'Hostil', 2, 1, 1, 1, 3, NULL),
+('Grande Slime', 'Hostil', 2, 3, 4, 6, 70, NULL),
+('Médio Slime', 'Hostil', 3, 2, 2, 3, 70, NULL),
+('Pequeno Slime', 'Hostil', 3, 0, 0, 0, 70, NULL),
+('Zombie', 'Hostil', 3, 2, 3, 4, 57, NULL)
 
 INSERT INTO MobComum(ID_mob) VALUES
 	(1),
@@ -295,13 +289,13 @@ INSERT INTO MobComum(ID_mob) VALUES
 (42),
 (43)
 
-INSERT INTO Villager( ID_Mob, Trabalho, ID_TipoItem) VALUES
-	(2, 'Desempregado', 56),
-	(44, 'Cartógrafo', 45),
-	(45, 'Fazendeiro', 17),
-	(46, 'Pedreiro', 2),
-	(47, 'Bibliotecário', 12),
-	(48, 'Armeiro', 1)
+-- ADD VILLAGERS
+EXEC dbo.create_villager_with_mob 2, 'Desempregado', 56;
+EXEC dbo.create_villager_with_mob 3, 'Cartógrafo', 45;
+EXEC dbo.create_villager_with_mob 2,  'Fazendeiro', 17;
+EXEC dbo.create_villager_with_mob 1, 'Pedreiro', 2;
+EXEC dbo.create_villager_with_mob 1, 'Bibliotecário', 12;
+EXEC dbo.create_villager_with_mob 2, 'Armeiro', 1;
 
 
 INSERT INTO Bloco (ID, Nome, Dureza, ID_Bioma,  ID_Personagem) 
