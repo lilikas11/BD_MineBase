@@ -6,12 +6,12 @@
 
 
 CREATE TABLE Jogador(
-[ID][int] NOT NULL PRIMARY KEY,
-[Nome] [varchar](64) NOT NULL,
-[Senha] [varchar](16) NOT NULL,
-[Data_Nascimento][datetime] NOT NULL,
-[Email][varchar](64) NOT NULL,
-[Idioma][varchar](16) NOT NULL
+	[ID][int] NOT NULL PRIMARY KEY,
+	[Nome] [varchar](64) NOT NULL,
+	[Senha] [varchar](16) NOT NULL,
+	[Data_Nascimento][datetime] NOT NULL,
+	[Email][varchar](64) NOT NULL,
+	[Idioma][varchar](16) NOT NULL
 )
 
 CREATE TABLE Mundo (
@@ -71,6 +71,8 @@ CREATE TABLE Item (
 GO
 
 CREATE TABLE Mob(
+	-- identity é uma geração de ids automatica, para usar faz se assim:
+	-- Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem)
 	[ID] [int] identity(1,1) PRIMARY KEY,
 	[Nome] [varchar](32) NOT NULL,
 	[Personalidade] [varchar](16) NOT NULL,
