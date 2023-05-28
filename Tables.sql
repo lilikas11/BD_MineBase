@@ -90,7 +90,7 @@ GO
 
 CREATE TABLE Bloco(
 	[ID] [int] NOT NULL PRIMARY KEY,
-	[Nome] [varchar](32) NOT NULL,
+	[Nome] [varchar](128) NOT NULL,
 	[Dureza] [float] NOT NULL,
 	[ID_Bioma][int] REFERENCES Bioma([ID]),
 	[ID_Personagem][int] REFERENCES Personagem([ID]),
