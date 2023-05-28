@@ -21,3 +21,21 @@ BEGIN
     VALUES (@mob_id, @v_trabalho, @v_id_tipo_item);
 
 END;
+
+
+
+-- compra villager (esta atualiza os elementos)
+-- EXEC dbo.Compra <id_personagem> , <id_villager>
+CREATE PROCEDURE EfetuaCompra(@id_personagem int, @id_villager int, @id_item int)
+AS
+BEGIN
+    -- Remove a esmeralda
+    DELETE FROM Item WHERE ID = @id_item;
+
+    -- tipo item villager
+    DECLARE @tipoItem int;
+    SET @tipoItem = (SELECT ID_TipoItem FROM Villager WHERE ID_Mob = @id_villager);
+
+    INSERT INTO Item VALUES (47, @tipoItem, @id_personagem);
+END
+GO
