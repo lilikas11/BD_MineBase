@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.Remoting.Messaging;
 
 namespace MineBase_final
 {
@@ -17,11 +18,15 @@ namespace MineBase_final
     {
         private int ID_Jogador;
         private SoundPlayer splayer;
+        private int ID_Personagem;
+
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        //pedir ID!!!! Só temos o nome
         private void login_Click(object sender, EventArgs e)
         {
             var cn = DatabaseHelper.getSGBDConnection();
@@ -45,7 +50,7 @@ namespace MineBase_final
             try
             {
                 SqlDataReader reader = cmd.ExecuteReader();
-                Boolean login = false;
+                bool login = false;
                 // Process the result set
                 while (login == false)
                 {
@@ -89,7 +94,7 @@ namespace MineBase_final
             if (!DatabaseHelper.verifySGBDConnection(cn2))
                 return;
             SqlCommand cmd2 = new SqlCommand();              
-            cmd2.CommandText = "SELECT Nome FROM dbo.Personagem WHERE ID_Jogador = (@ID_Jogador)";
+            cmd2.CommandText = "SELECT ID, Nome FROM dbo.Personagem WHERE ID_Jogador = (@ID_Jogador)";
             cmd2.Parameters.AddWithValue("@ID_Jogador", ID_Jogador);
             cmd2.Connection = cn2;
 
@@ -98,7 +103,9 @@ namespace MineBase_final
             {
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read()) {
-                    string nomePersonagem = reader2.GetString(0);
+                    ID_Personagem = int.Parse(reader2["ID"].ToString());
+                    var nomePersonagem = reader2["Nome"].ToString();
+                    Console.WriteLine("ID: " + ID_Personagem);
                     comboBoxPersonagem.Items.Add(nomePersonagem);
                 }
                 
@@ -151,6 +158,72 @@ namespace MineBase_final
         private void TryAgain2Button_Click(object sender, EventArgs e)
         {
             CredentialsNotPanel.Visible = false;
+        }
+
+        //button2 ---> selecionar personagem
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+           
+            // Verificação               
+            cmd.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)"; 
+            cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd.Connection = cn;
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeItem = reader["Nome"].ToString();
+                    Console.WriteLine("ID: " + nomeItem);
+                    listBox1.Items.Add(nomeItem);
+                }
+                panel3.Visible = false;
+                panel2.Visible = true;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            //var cn2 = DatabaseHelper.getSGBDConnection();
+            //if (!DatabaseHelper.verifySGBDConnection(cn))
+            //    return;
+            //SqlCommand cmd2 = new SqlCommand();
+
+            //// Verificação               
+            //cmd2.CommandText = "SELECT * FROM dbo. InventárioMundo (@ID_Personagem)";
+            //cmd2.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            //cmd2.Connection = cn2;
+            //try
+            //{
+            //    SqlDataReader reader = cmd2.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        var nomeElemento = reader["Nome"].ToString();
+            //        Console.WriteLine("ID: " + nomeElemento);
+            //        listBox2.Items.Add(nomeElemento);
+            //    }
+            //    panel3.Visible = false;
+            //    panel2.Visible = true;
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            //}
+            //finally
+            //{
+            //    cn2.Close();
+            //}
         }
     }
 }
