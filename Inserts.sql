@@ -208,7 +208,7 @@ INSERT INTO Item(ID_TipoItem, ID_Personagem) VALUES
 	(81, 1),
 	(81, 1),
 	(81, 1),
-	(81, 1),
+	(81, 1)
 
 INSERT INTO Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
 ('Axalote', 'Passiva', 1, 2, 2, 2, NULL, NULL),
