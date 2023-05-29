@@ -104,7 +104,7 @@ INSERT INTO TipoItem(ID,Nome) VALUES
 (77, 'Poção de Força'),
 (78, 'Poção de Invisibilidade'),
 (79, 'Osso'),
-(80, 'Lã')
+(80, 'Lã'),
 (81, 'Esmeralda')
 
 INSERT INTO Arma (ID_TipoItem, Durabilidade, Dano) VALUES
