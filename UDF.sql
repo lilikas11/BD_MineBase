@@ -40,16 +40,6 @@ as
 	)
 go
 
--- retorna todas as coisas do mundo
-create function MundoFunction()
-returns table
-as
-	return(
-		select ID, Nome, Tipo FROM MundoView
-	)
-
-go
-
 -- retorna todas as coisas do bioma pela escolha do id
 create function BiomaFunction(@id_bioma int)
 returns table
