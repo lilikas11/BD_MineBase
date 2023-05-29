@@ -39,3 +39,24 @@ BEGIN
     INSERT INTO Item VALUES (@tipoItem, @id_personagem);
 END
 GO
+
+
+-- matar o mobzito
+CREATE PROCEDURE Matar(@id_personagem int, @id_mob int)
+as
+	begin
+		-- matou
+		UPDATE Mob
+		SET ID_Bioma = NULL, MortoPor_ID_Personagem = @id_personagem
+		where ID = @id_mob
+
+		 -- tipo item villager
+		DECLARE @tipoItem int;
+		SET @tipoItem = (SELECT ID_TipoItem FROM Mob WHERE ID = @id_mob);
+		if @tipoItem is not null
+		begin
+			INSERT INTO Item VALUES (@tipoItem, @id_personagem);
+		end
+
+	end
+go
