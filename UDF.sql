@@ -36,3 +36,13 @@ BEGIN
 
     RETURN @status;
 END;
+
+
+-- inventário
+create function Inventário(@id_personagem int)
+returns table
+as
+	return(
+		select Nome from InventárioView where ID_Personagem = @id_personagem
+	)
+go
