@@ -12,25 +12,24 @@ as
 go
 
 -- Função para ver se o player tem esmeraldas
-CREATE FUNCTION Compra(@id_personagem int) RETURNS INT
+-- como usar: SELECT Personagem.Nome FROM Personagem WHERE dbo.PodeComprar(Personagem.ID) = 1
+CREATE FUNCTION PodeComprar(@id_personagem int) RETURNS INT
 as
     BEGIN
-    DECLARE @status int;
+    DECLARE @status int
 
     IF (SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81) IS NOT NULL
     BEGIN
-        -- Mob está vivo
         SET @status = 1;
     END
     ELSE
     BEGIN
-        -- Mob está morto
         SET @status = 0;
     END
 
-    RETURN @status;
+    RETURN @status
+end
 go
-
 
 -- inventário
 create function Inventário(@id_personagem int)
