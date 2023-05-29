@@ -12,18 +12,12 @@ as
 go
 
 -- Função para ver se o player tem esmeraldas
-CREATE FUNCTION Compra(@id_personagem int) RETURNS table
+CREATE FUNCTION Compra(@id_personagem int) RETURNS INT
 as
-	return(SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81)
-go
-
--- ver se o mob tá vivo
-CREATE FUNCTION Morto(@id_mob int) RETURNS int
-AS
-BEGIN
+    BEGIN
     DECLARE @status int;
 
-    IF (SELECT ID_Bioma FROM Mob WHERE ID = @id_mob) IS NOT NULL
+    IF (SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81) IS NOT NULL
     BEGIN
         -- Mob está vivo
         SET @status = 1;
@@ -35,7 +29,7 @@ BEGIN
     END
 
     RETURN @status;
-END;
+go
 
 
 -- inventário
