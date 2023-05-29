@@ -19,11 +19,20 @@ namespace MineBase_final
         private int ID_Jogador;
         private SoundPlayer splayer;
         private int ID_Personagem;
+        private string nomeItemSelecionadoL1;
+        private string nomeItemSelecionadoL2;
+        private int ID_CurrentBioma;
+        private List<InventarioDoMundo> inventarioMundo;
+
 
 
         public Form1()
         {
             InitializeComponent();
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
+            inventarioMundo = new List<InventarioDoMundo>();
+            this.MouseClick += Form1_MouseClick;
         }
 
         //pedir ID!!!! Só temos o nome
@@ -154,7 +163,6 @@ namespace MineBase_final
             //voltar a tentar preencher campos
         }
 
-        //eliminar esta merda
         private void TryAgain2Button_Click(object sender, EventArgs e)
         {
             CredentialsNotPanel.Visible = false;
@@ -167,8 +175,7 @@ namespace MineBase_final
             if (!DatabaseHelper.verifySGBDConnection(cn))
                 return;
             SqlCommand cmd = new SqlCommand();
-           
-            // Verificação               
+                         
             cmd.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)"; 
             cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
             cmd.Connection = cn;
@@ -194,36 +201,85 @@ namespace MineBase_final
                 cn.Close();
             }
 
-            //var cn2 = DatabaseHelper.getSGBDConnection();
-            //if (!DatabaseHelper.verifySGBDConnection(cn))
-            //    return;
-            //SqlCommand cmd2 = new SqlCommand();
+            var cn2 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn2))
+                return;
+            SqlCommand cmd2 = new SqlCommand();
+            inventarioMundo.Clear();
+            // ALTERAR ---> JÁ NÃO EXISTE ESTA FUNCTION, APENAS OS BIOMAS             
+            cmd2.CommandText = "SELECT * FROM dbo.MundoFunction()";
+            cmd2.Connection = cn2;
+            try
+            {
+                SqlDataReader reader = cmd2.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeElemento = reader["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Nome = reader["Nome"].ToString(),
+                        Tipo = reader["Tipo"].ToString(),
+                    };
+                    inventarioMundo.Add(obj1);
+                   // inventarioMundo.Find(x => x.ID == 12)  ---> Aprende burra
 
-            //// Verificação               
-            //cmd2.CommandText = "SELECT * FROM dbo. InventárioMundo (@ID_Personagem)";
-            //cmd2.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
-            //cmd2.Connection = cn2;
-            //try
-            //{
-            //    SqlDataReader reader = cmd2.ExecuteReader();
-            //    while (reader.Read())
-            //    {
-            //        var nomeElemento = reader["Nome"].ToString();
-            //        Console.WriteLine("ID: " + nomeElemento);
-            //        listBox2.Items.Add(nomeElemento);
-            //    }
-            //    panel3.Visible = false;
-            //    panel2.Visible = true;
+                    Console.WriteLine("ID: " + nomeElemento);
+                    listBox2.Items.Add(nomeElemento);
+                }
+                panel3.Visible = false;
+                panel2.Visible = true;
+                
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
-            //}
-            //finally
-            //{
-            //    cn2.Close();
-            //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn2.Close();
+            }
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                string selectedItem = listBox1.SelectedItem.ToString();
+                nomeItemSelecionadoL1 = selectedItem;
+                infoButton.Visible = true;
+                
+            }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Control control = listBox1;
+            Point relativePoint = control.PointToClient(Cursor.Position);
+            if (!control.Bounds.Contains(relativePoint))
+            {
+                listBox1.ClearSelected();
+                infoButton.Visible = false;
+            }
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem != null)
+            {
+                string selectedItem = listBox2.SelectedItem.ToString();
+                nomeItemSelecionadoL2 = selectedItem;
+                infoButton2.Visible = true;
+            }
+        }
+
+        //SHOW STATS DO INVENTÁRIO
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
