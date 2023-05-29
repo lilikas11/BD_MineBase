@@ -72,3 +72,16 @@ as
     RETURN @status
 end
 go
+
+-- count de kills
+-- vais ter de guardar isto numa var global pq quando reset o dia o morto por tbm reseta
+create function kills(@id_personagem int)
+returns int
+as 
+begin
+	return(
+		select COUNT(*) as KillsCount
+			from Mob where MortoPor_ID_Personagem = @id_personagem
+	)
+	end
+go
