@@ -59,3 +59,26 @@ as
 	)
 
 go
+
+-- Função para ver se o player tem arma
+create function TemArma(@id_personagem int) returns int
+as
+	begin
+	declare @status int
+	
+	-- isto tem de dar umas voltas imensas -> item -> tipoitem + armas->tipoitem
+	if(select top 1 I.ID
+		from Item I 
+		Join TipoItem T on T.ID = I.ID_TipoItem
+		Join Arma A on A.ID_TipoItem = T.ID) is not null
+	BEGIN
+        SET @status = 1;
+    END
+    ELSE
+    BEGIN
+        SET @status = 0;
+    END
+
+    RETURN @status
+end
+go
