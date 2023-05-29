@@ -73,3 +73,14 @@ as
 
 	end
 go
+
+-- PassarDia
+CREATE procedure PassarDia(@id_bioma int)
+as
+ begin
+	update Mob
+	set ID_Bioma = @id_bioma,
+	MortoPor_ID_Personagem = null
+	where ID_Bioma is null
+ end
+go
