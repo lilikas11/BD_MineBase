@@ -60,3 +60,16 @@ as
 
 	end
 go
+
+-- Fazer as acoes do minerar
+CREATE procedure Minerar(@id_bloco int, @id_personagem int)
+as
+	begin
+		-- matar bloco
+			Update Bloco
+			set ID_Bioma = NULL, 
+			ID_Personagem = @id_personagem
+			where ID = @id_bloco
+
+	end
+go
