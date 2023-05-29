@@ -77,7 +77,6 @@ BEGIN
     SET NOCOUNT ON;
     DELETE FROM Mob WHERE MortoPor_ID_Personagem IN (SELECT ID FROM deleted);
     DELETE FROM Aquisicao WHERE ID_Villager IN (SELECT ID_Mob FROM deleted);
-    DELETE FROM MobComum WHERE ID_Mob IN (SELECT ID FROM deleted);
     DELETE FROM Mob WHERE ID IN (SELECT ID FROM deleted);
 END
 GO
