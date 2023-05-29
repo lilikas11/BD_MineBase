@@ -252,7 +252,9 @@ INSERT INTO Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Di
 ('Grande Slime', 'Hostil', 2, 3, 4, 6, 70, NULL),
 ('Médio Slime', 'Hostil', 3, 2, 2, 3, 70, NULL),
 ('Pequeno Slime', 'Hostil', 3, 0, 0, 0, 70, NULL),
-('Zombie', 'Hostil', 3, 2, 3, 4, 57, NULL)
+('Zombie', 'Hostil', 3, 2, 3, 4, 57, NULL),
+('Piglin', 'Neutral', 1, 5, 5, 5, 81, NULL),
+('Piglin', 'Neutral', 1, 5, 5, 5, 81, NULL)
 
 INSERT INTO MobComum(ID_mob) VALUES
 	(1),
