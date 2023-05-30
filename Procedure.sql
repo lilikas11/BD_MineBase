@@ -3,7 +3,7 @@ GO
 
 
 -- Add do Villager
-CREATE PROCEDURE dbo.create_villager_with_mob (
+CREATE PROCEDURE create_villager_with_mob (
     @v_id_bioma INT,
 	@v_trabalho VARCHAR(32),
     @v_id_tipo_item INT
@@ -20,7 +20,8 @@ BEGIN
     INSERT INTO Villager(ID_Mob, Trabalho, ID_TipoItem)
     VALUES (@mob_id, @v_trabalho, @v_id_tipo_item);
 
-END;
+END
+go
 
 
 
