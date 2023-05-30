@@ -124,12 +124,14 @@ INSERT INTO Comida (ID_TipoItem, Fome) VALUES
 	(4, 3),
 	(14, 1),
 	(15, 1),
+	(27, 1),
 	(44, 3),
 	(53, 4),
-	(57, 1),
+	(59, 1),
 	(64, 1 ),
 	(65, 2),
-	(66, 2)
+	(66, 2),
+	(3, 3)
 
 INSERT INTO Pocao (ID_TipoItem, Tempo, Efeito) VALUES
 	(71, 45, 'Restaura vida'),
@@ -202,13 +204,7 @@ INSERT INTO Item(ID_TipoItem, ID_Personagem) VALUES
 	(5, 1),
 	(6, 2),
 	(23, 2),
-	(81, 1),
-	(81, 1),
-	(81, 1),
-	(81, 1),
-	(81, 1),
-	(81, 1),
-	(81, 1)
+	(2, 1)
 
 INSERT INTO Mob (Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem) VALUES
 ('Axalote', 'Passiva', 1, 2, 2, 2, NULL, NULL),
