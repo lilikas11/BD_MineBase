@@ -204,3 +204,15 @@ as
 	)
 go
 
+
+-- procura QUALQUER COISA no mundo
+create function SearchMundo(@string varchar(128), @id_bioma int)
+returns table
+as
+	return(
+		select ID, Nome, Tipo from MundoView where ID_Bioma = @id_bioma and 
+			(Nome like '%' + @string + '%' or Tipo like '%' + @string + '%')
+			-- assim podes procurar só a string na palavra :)
+	)
+go
+
