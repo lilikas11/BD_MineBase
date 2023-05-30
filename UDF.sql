@@ -85,3 +85,68 @@ begin
 	)
 	end
 go
+
+-- Pegar a info do Item
+-- retorna o nome + tipo + propriedade1 + propriedade2 -> caso não tenha fica null, 
+-- ex. o item comum retorna nome = <nome>, tipo = itemComum, propriedade1 = null, propriedade2 = null
+create function ItemInfo(@id_item int)
+returns table
+as
+	return(
+	-- pega no id_item busca o id_tipo_item e dá show das props desse
+		select TI.Nome,
+			-- primeiro tenho de fazer o tipo 
+			case when A.ID_TipoItem is not null AND A.ID_TipoItem = I.ID_TipoItem
+				then 'Arma'
+				when C.ID_TipoItem is not null AND C.ID_TipoItem = I.ID_TipoItem
+				then 'Comida'
+				when P.ID_TipoItem is not null AND P.ID_TipoItem = I.ID_TipoItem
+				then 'Poção'
+				else 'Item Comum'
+				end
+			as Tipo,
+			-- agora as propriedades (propriedade 1 e 2, se não tiver vai null)
+			case 
+				when A.ID_TipoItem is not null then A.Durabilidade
+				when C.ID_TipoItem is not null then C.Fome
+				when P.ID_TipoItem is not null then P.Efeito
+				end
+			as Propriedade1,
+			case
+				when A.ID_TipoItem is not null then A.Dano
+				when P.ID_TipoItem is not null then P.Tempo
+			end
+			as Propriedade2
+			from Item I 
+		inner join TipoItem TI on TI.ID = I.ID_TipoItem
+		left join Arma A on A.ID_TipoItem = TI.ID
+		left join Comida C on C.ID_TipoItem = TI.ID
+		left join Pocao P on P.ID_TipoItem = TI.ID
+		where I.ID = @id_item
+	)
+go
+
+-- pegar a info do Bloco
+create function BlocoInfo(@id_bloco int)
+returns table
+as
+	return (
+		select Nome, Dureza from Bloco where ID = @id_bloco
+	)
+go
+
+
+-- pegar a info do Mob
+-- retorna as infos + trabalho -> null se não for villager
+create function MobInfo(@id_mob int)
+returns table
+as
+	 return(
+			SELECT M.Nome, M.Personalidade, M.Dano_Facil, M.Dano_Normal, M.Dano_Dificil, TI.Nome AS [Drop], 
+				 V.Trabalho
+			FROM Mob M
+			LEFT JOIN Villager V ON V.ID_Mob = M.ID
+			INNER JOIN TipoItem TI ON TI.ID = M.ID_TipoItem
+			WHERE M.ID = @id_mob
+	 )
+go
