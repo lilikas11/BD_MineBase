@@ -1,6 +1,3 @@
-USE MineBase
-GO
-
 
 -- Add do Villager
 CREATE PROCEDURE create_villager_with_mob (
