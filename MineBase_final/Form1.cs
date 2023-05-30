@@ -20,7 +20,7 @@ namespace MineBase_final
         private SoundPlayer splayer;
         private int ID_Personagem;
         private string nomeItemSelecionadoL1;
-        private int ID_SelectedItemL2; // --> guardar ID em vez de nome
+        private int ID_SelectedItemL2;
         private int ID_CurrentBioma;
         private string nomeBioma;
         private List<InventarioDoMundo> inventarioMundo;
@@ -242,7 +242,7 @@ namespace MineBase_final
             if (!DatabaseHelper.verifySGBDConnection(cn3))
                 return;
             SqlCommand cmd3 = new SqlCommand();
-            cmd3.CommandText = "SELECT ID, Nome FROM dbo.Bioma";
+            cmd3.CommandText = "SELECT ID, Nome FROM dbo.Bioma order by Nome asc";
             cmd3.Connection = cn3;
             try
             {
@@ -250,6 +250,7 @@ namespace MineBase_final
                 while (reader.Read())
                 {
                     var nomeBioma = reader["Nome"].ToString();
+                    if(string.IsNullOrEmpty(comboBox2.Text)) comboBox2.Text = nomeBioma;
                     comboBox2.Items.Add(nomeBioma);
                 }
                 //perguntar ao pedro como pôr um default
@@ -326,21 +327,24 @@ namespace MineBase_final
         }
       private void infoButton2_Click(object sender, EventArgs e)
             {
+            int ID_ItemSelectedDB = ID_SelectedItemL2 + 1;
             var cn = DatabaseHelper.getSGBDConnection();
             if (!DatabaseHelper.verifySGBDConnection(cn))
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            if (inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")
+            if (inventarioMundo[ID_ItemSelectedDB].Tipo == "Bloco")
             {
-                cmd.CommandText = "SELECT * FROM dbo.BlocoInfo(@ID_Item)";
-                cmd.Parameters.AddWithValue("@ID_Item", ID_SelectedItemL2);
+                int ID_Bloco = inventarioMundo[ID_ItemSelectedDB].ID;
+                cmd.CommandText = "SELECT * FROM dbo.BlocoInfo(@ID_Bloco)";
+                cmd.Parameters.AddWithValue("@ID_Bloco", ID_Bloco);
                 cmd.Connection = cn;
                 try
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
+                        textBox1.Text = reader["Nome"].ToString();
                         textBox10.Text = reader["Dureza"].ToString();
                     }
                     panel1.Visible = true;
@@ -354,16 +358,18 @@ namespace MineBase_final
                 }
             }
 
-            else if (inventarioMundo[ID_SelectedItemL2].Tipo == "Mob" || inventarioMundo[ID_SelectedItemL2].Tipo == "Villager")
+            else if (inventarioMundo[ID_ItemSelectedDB].Tipo == "Mob" || inventarioMundo[ID_ItemSelectedDB].Tipo == "Villager")
             {
-                cmd.CommandText = "SELECT * FROM dbo.MobInfo(@ID_Item)";
-                cmd.Parameters.AddWithValue("@ID_Item", ID_SelectedItemL2);
+                int ID_Mob = inventarioMundo[ID_ItemSelectedDB].ID;
+                cmd.CommandText = "SELECT * FROM dbo.MobInfo(@ID_Mob)";
+                cmd.Parameters.AddWithValue("@ID_Mob", ID_Mob);
                 cmd.Connection = cn;
                 try
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
+                        textBox1.Text = reader["Nome"].ToString();
                         textBox6.Text = reader["Personalidade"].ToString();
                         textBox12.Text = reader["Dano_Facil"].ToString();
                         textBox7.Text = reader["Dano_Normal"].ToString();
@@ -429,6 +435,57 @@ namespace MineBase_final
 
         }
 
-      
+        private void FecharInfoButton_Click(object sender, EventArgs e)
+        {
+            textDurabilidade.Clear();
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            textBox9.Clear();
+            textBox8.Clear();
+            textBox10.Clear();
+            textBox11.Clear();
+            textBox12.Clear();
+            panel1.Visible = false;
+        }
+
+        private void AddInvent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FilterMund_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NextDayButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MatarMob_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Minerar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
