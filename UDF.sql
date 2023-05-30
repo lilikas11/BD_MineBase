@@ -152,6 +152,15 @@ as
 go
 
 
+create function FiltroMundo(@id_bioma int, @tipo varchar(16))
+returns table
+as
+	return (
+		select ID, Nome, Tipo from MundoView where ID_Bioma = @id_bioma and 
+			(Tipo = @tipo or (Tipo = 'villager' and @tipo = 'Mob'))
+	)
+go
+
 -- filtra o inventario por bloco, item, arma, comida, poção, item comum
 create function FiltroInventario(@id_personagem int, @tipo varchar(16))
 returns table
