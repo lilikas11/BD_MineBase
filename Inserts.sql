@@ -6,16 +6,16 @@ GO
 
 INSERT INTO Jogador(ID, Nome, Senha, Data_Nascimento, Email, Idioma)
 VALUES
-  (1, 'Lia', 'lia1234', 02/01/2003, 'lia@gmail.com', 'portugues'),
-  (2, 'Lili', 'lili1234', 02/01/2003, 'lili@gmail.com', 'portugues')
+  ('Lia', 'lia1234', 02/01/2003, 'lia@gmail.com', 'portugues'),
+  ('Lili', 'lili1234', 02/01/2003, 'lili@gmail.com', 'portugues')
 
 INSERT INTO Mundo(Seed, Nome, Dificuldade) VALUES
 	(1234, 'DETI', 'Dificil')
 
 INSERT INTO Personagem(ID, Nome, ID_Jogador, Seed_Mundo) VALUES
-	(1, 'P1',1, 1234),
-	(2, 'P2',2, 1234),
-	(3, 'P3',1, NULL)
+	('P1',1, 1234),
+	('P2',2, 1234),
+	('P3',1, NULL)
 	
 
 INSERT INTO Bioma (ID, Seed_Mundo, Nome) VALUES
