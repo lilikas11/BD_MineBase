@@ -104,3 +104,21 @@ begin
 	end
 end 
 go
+
+-- adicionar Jogador
+create procedure AddJogador(@nome varchar(64), @senha varchar(16), @data datetime, @email varchar(64), @idioma varchar(16))
+as
+begin
+	Insert into Jogador values
+		(@nome, @senha,@data,@email,@idioma)
+end
+go
+
+-- adicionar personagem
+create procedure AddPersonagem(@nome varchar(64), @id_jogador int, @seed_mundo int)
+as
+begin
+	insert into Personagem values
+		(@nome, @id_jogador, @seed_mundo)
+end
+go
