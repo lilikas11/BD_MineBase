@@ -150,3 +150,48 @@ as
 			WHERE M.ID = @id_mob
 	 )
 go
+
+
+-- filtra o inventario por bloco, item, arma, comida, poção, item comum
+create function FiltroInventario(@id_personagem int, @tipo varchar(16))
+returns table
+as
+	return(
+		select ID, Nome from InventárioView IV where IV.ID_Personagem=@id_personagem and 
+            (@tipo = 'bloco' AND EXISTS (
+                SELECT *
+                FROM Bloco B
+				where Tipo = @tipo and ID = B.ID
+            ))
+            OR (@tipo = 'item' AND EXISTS (
+                SELECT 1
+                FROM Item I
+                where Tipo = @tipo and ID = I.ID
+            ))
+            OR (@tipo = 'arma' AND EXISTS (
+                SELECT 1
+                FROM Arma A
+                INNER JOIN Item I ON I.ID_TipoItem = A.ID_TipoItem
+                WHERE Tipo = 'item' and I.ID = IV.ID
+            ))
+            OR (@tipo = 'comida' AND EXISTS (
+                SELECT 1
+                FROM Comida C
+                INNER JOIN Item I ON I.ID_TipoItem = C.ID_TipoItem
+                WHERE Tipo = 'item' and I.ID = IV.ID
+            ))
+            OR (@tipo = 'poção' AND EXISTS (
+                SELECT 1
+                FROM Pocao P
+                INNER JOIN Item I ON I.ID_TipoItem = P.ID_TipoItem
+                WHERE Tipo = 'item' and I.ID = IV.ID
+            ))
+            OR (@tipo = 'item comum' AND EXISTS (
+                SELECT 1
+                FROM ItemComum IC
+                INNER JOIN Item I ON I.ID_TipoItem = IC.ID_TipoItem
+                WHERE Tipo = 'item' and I.ID = IV.ID
+            ))
+	)
+go
+
