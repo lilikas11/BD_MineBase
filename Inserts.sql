@@ -4,7 +4,7 @@ GO
 
 ---INSERT INTO TABLES
 
-INSERT INTO Jogador(ID, Nome, Senha, Data_Nascimento, Email, Idioma)
+INSERT INTO Jogador(Nome, Senha, Data_Nascimento, Email, Idioma)
 VALUES
   ('Lia', 'lia1234', 02/01/2003, 'lia@gmail.com', 'portugues'),
   ('Lili', 'lili1234', 02/01/2003, 'lili@gmail.com', 'portugues')
@@ -12,7 +12,7 @@ VALUES
 INSERT INTO Mundo(Seed, Nome, Dificuldade) VALUES
 	(1234, 'DETI', 'Dificil')
 
-INSERT INTO Personagem(ID, Nome, ID_Jogador, Seed_Mundo) VALUES
+INSERT INTO Personagem(Nome, ID_Jogador, Seed_Mundo) VALUES
 	('P1',1, 1234),
 	('P2',2, 1234),
 	('P3',1, NULL)
