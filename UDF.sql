@@ -145,8 +145,8 @@ as
 			SELECT M.Nome, M.Personalidade, M.Dano_Facil, M.Dano_Normal, M.Dano_Dificil, TI.Nome AS [Drop], 
 				 V.Trabalho
 			FROM Mob M
-			LEFT JOIN Villager V ON V.ID_Mob = M.ID
-			INNER JOIN TipoItem TI ON TI.ID = M.ID_TipoItem
+			left JOIN Villager V ON V.ID_Mob = M.ID
+			left JOIN TipoItem TI ON TI.ID = M.ID_TipoItem
 			WHERE M.ID = @id_mob
 	 )
 go
