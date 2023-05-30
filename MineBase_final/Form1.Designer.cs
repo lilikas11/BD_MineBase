@@ -30,18 +30,18 @@ namespace MineBase_final
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.loginPanel = new System.Windows.Forms.Panel();
-            this.CredentialsNotPanel = new System.Windows.Forms.Panel();
-            this.TryAgain2Button = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.ErrorPopUpPanel = new System.Windows.Forms.Panel();
-            this.TryAgainButton = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.login = new System.Windows.Forms.Button();
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.EmailTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.CredentialsNotPanel = new System.Windows.Forms.Panel();
+            this.TryAgain2Button = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ErrorPopUpPanel = new System.Windows.Forms.Panel();
+            this.TryAgainButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -81,7 +81,6 @@ namespace MineBase_final
             this.MatarMob = new System.Windows.Forms.Button();
             this.SoundButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -89,10 +88,15 @@ namespace MineBase_final
             this.label4 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.Minerar = new System.Windows.Forms.Button();
+            this.AddInvent = new System.Windows.Forms.Button();
+            this.FilterInvent = new System.Windows.Forms.Label();
+            this.FilterMundo = new System.Windows.Forms.Label();
+            this.FilterMund = new System.Windows.Forms.ComboBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.loginPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.CredentialsNotPanel.SuspendLayout();
             this.ErrorPopUpPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -106,71 +110,10 @@ namespace MineBase_final
             this.loginPanel.Controls.Add(this.EmailTextBox);
             this.loginPanel.Controls.Add(this.label2);
             this.loginPanel.Controls.Add(this.label1);
-            this.loginPanel.Location = new System.Drawing.Point(6, 12);
+            this.loginPanel.Location = new System.Drawing.Point(12, 12);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(782, 465);
             this.loginPanel.TabIndex = 1;
-            // 
-            // CredentialsNotPanel
-            // 
-            this.CredentialsNotPanel.Controls.Add(this.TryAgain2Button);
-            this.CredentialsNotPanel.Controls.Add(this.label8);
-            this.CredentialsNotPanel.Location = new System.Drawing.Point(3, 8);
-            this.CredentialsNotPanel.Name = "CredentialsNotPanel";
-            this.CredentialsNotPanel.Size = new System.Drawing.Size(782, 472);
-            this.CredentialsNotPanel.TabIndex = 7;
-            this.CredentialsNotPanel.Visible = false;
-            // 
-            // TryAgain2Button
-            // 
-            this.TryAgain2Button.Location = new System.Drawing.Point(361, 250);
-            this.TryAgain2Button.Name = "TryAgain2Button";
-            this.TryAgain2Button.Size = new System.Drawing.Size(125, 46);
-            this.TryAgain2Button.TabIndex = 1;
-            this.TryAgain2Button.Text = "Try Again";
-            this.TryAgain2Button.UseVisualStyleBackColor = true;
-            this.TryAgain2Button.Click += new System.EventHandler(this.TryAgain2Button_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(142, 160);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(362, 32);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Credentials Not Authorized!";
-            // 
-            // ErrorPopUpPanel
-            // 
-            this.ErrorPopUpPanel.Controls.Add(this.TryAgainButton);
-            this.ErrorPopUpPanel.Controls.Add(this.label7);
-            this.ErrorPopUpPanel.Location = new System.Drawing.Point(6, 11);
-            this.ErrorPopUpPanel.Name = "ErrorPopUpPanel";
-            this.ErrorPopUpPanel.Size = new System.Drawing.Size(782, 472);
-            this.ErrorPopUpPanel.TabIndex = 6;
-            this.ErrorPopUpPanel.Visible = false;
-            this.ErrorPopUpPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // TryAgainButton
-            // 
-            this.TryAgainButton.Location = new System.Drawing.Point(361, 250);
-            this.TryAgainButton.Name = "TryAgainButton";
-            this.TryAgainButton.Size = new System.Drawing.Size(125, 46);
-            this.TryAgainButton.TabIndex = 1;
-            this.TryAgainButton.Text = "Try Again";
-            this.TryAgainButton.UseVisualStyleBackColor = true;
-            this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(164, 136);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 32);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Fill all Fields!";
             // 
             // pictureBox1
             // 
@@ -225,6 +168,67 @@ namespace MineBase_final
             this.label1.TabIndex = 0;
             this.label1.Text = "E-mail:";
             // 
+            // CredentialsNotPanel
+            // 
+            this.CredentialsNotPanel.Controls.Add(this.TryAgain2Button);
+            this.CredentialsNotPanel.Controls.Add(this.label8);
+            this.CredentialsNotPanel.Location = new System.Drawing.Point(0, 0);
+            this.CredentialsNotPanel.Name = "CredentialsNotPanel";
+            this.CredentialsNotPanel.Size = new System.Drawing.Size(782, 472);
+            this.CredentialsNotPanel.TabIndex = 7;
+            this.CredentialsNotPanel.Visible = false;
+            // 
+            // TryAgain2Button
+            // 
+            this.TryAgain2Button.Location = new System.Drawing.Point(361, 250);
+            this.TryAgain2Button.Name = "TryAgain2Button";
+            this.TryAgain2Button.Size = new System.Drawing.Size(125, 46);
+            this.TryAgain2Button.TabIndex = 1;
+            this.TryAgain2Button.Text = "Try Again";
+            this.TryAgain2Button.UseVisualStyleBackColor = true;
+            this.TryAgain2Button.Click += new System.EventHandler(this.TryAgain2Button_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(142, 160);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(362, 32);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Credentials Not Authorized!";
+            // 
+            // ErrorPopUpPanel
+            // 
+            this.ErrorPopUpPanel.Controls.Add(this.TryAgainButton);
+            this.ErrorPopUpPanel.Controls.Add(this.CredentialsNotPanel);
+            this.ErrorPopUpPanel.Controls.Add(this.label7);
+            this.ErrorPopUpPanel.Location = new System.Drawing.Point(12, 12);
+            this.ErrorPopUpPanel.Name = "ErrorPopUpPanel";
+            this.ErrorPopUpPanel.Size = new System.Drawing.Size(782, 472);
+            this.ErrorPopUpPanel.TabIndex = 6;
+            this.ErrorPopUpPanel.Visible = false;           
+            // 
+            // TryAgainButton
+            // 
+            this.TryAgainButton.Location = new System.Drawing.Point(361, 250);
+            this.TryAgainButton.Name = "TryAgainButton";
+            this.TryAgainButton.Size = new System.Drawing.Size(125, 46);
+            this.TryAgainButton.TabIndex = 1;
+            this.TryAgainButton.Text = "Try Again";
+            this.TryAgainButton.UseVisualStyleBackColor = true;
+            this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(164, 136);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(181, 32);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Fill all Fields!";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -255,7 +259,7 @@ namespace MineBase_final
             this.panel1.Controls.Add(this.Durabilidade);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(3, 7);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(813, 504);
             this.panel1.TabIndex = 8;
@@ -372,6 +376,7 @@ namespace MineBase_final
             this.FecharInfoButton.TabIndex = 1;
             this.FecharInfoButton.Text = "X";
             this.FecharInfoButton.UseVisualStyleBackColor = false;
+            this.FecharInfoButton.Click += new System.EventHandler(this.FecharInfoButton_Click);
             // 
             // textBox6
             // 
@@ -498,7 +503,7 @@ namespace MineBase_final
             this.panel3.Controls.Add(this.comboBoxPersonagem);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(6, 12);
+            this.panel3.Location = new System.Drawing.Point(12, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(782, 471);
             this.panel3.TabIndex = 2;
@@ -535,13 +540,17 @@ namespace MineBase_final
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.textBox13);
+            this.panel2.Controls.Add(this.FilterMundo);
+            this.panel2.Controls.Add(this.FilterMund);
+            this.panel2.Controls.Add(this.FilterInvent);
+            this.panel2.Controls.Add(this.AddInvent);
             this.panel2.Controls.Add(this.infoButton2);
             this.panel2.Controls.Add(this.NextDayButton);
             this.panel2.Controls.Add(this.infoButton);
             this.panel2.Controls.Add(this.MatarMob);
             this.panel2.Controls.Add(this.SoundButton);
             this.panel2.Controls.Add(this.listBox1);
-            this.panel2.Controls.Add(this.comboBox4);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.comboBox3);
             this.panel2.Controls.Add(this.label5);
@@ -554,13 +563,12 @@ namespace MineBase_final
             this.panel2.Size = new System.Drawing.Size(776, 426);
             this.panel2.TabIndex = 1;
             this.panel2.Visible = false;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // infoButton2
             // 
-            this.infoButton2.Location = new System.Drawing.Point(657, 185);
+            this.infoButton2.Location = new System.Drawing.Point(657, 142);
             this.infoButton2.Name = "infoButton2";
-            this.infoButton2.Size = new System.Drawing.Size(94, 37);
+            this.infoButton2.Size = new System.Drawing.Size(109, 37);
             this.infoButton2.TabIndex = 13;
             this.infoButton2.Text = "Info";
             this.infoButton2.UseVisualStyleBackColor = true;
@@ -575,6 +583,7 @@ namespace MineBase_final
             this.NextDayButton.TabIndex = 12;
             this.NextDayButton.Text = "Próximo Dia";
             this.NextDayButton.UseVisualStyleBackColor = true;
+            this.NextDayButton.Click += new System.EventHandler(this.NextDayButton_Click);
             // 
             // infoButton
             // 
@@ -589,13 +598,14 @@ namespace MineBase_final
             // 
             // MatarMob
             // 
-            this.MatarMob.Location = new System.Drawing.Point(657, 142);
+            this.MatarMob.Location = new System.Drawing.Point(657, 185);
             this.MatarMob.Name = "MatarMob";
             this.MatarMob.Size = new System.Drawing.Size(109, 37);
             this.MatarMob.TabIndex = 9;
             this.MatarMob.Text = "Matar Mob";
             this.MatarMob.UseVisualStyleBackColor = true;
             this.MatarMob.Visible = false;
+            this.MatarMob.Click += new System.EventHandler(this.MatarMob_Click);
             // 
             // SoundButton
             // 
@@ -616,19 +626,11 @@ namespace MineBase_final
             this.listBox1.Size = new System.Drawing.Size(265, 264);
             this.listBox1.TabIndex = 6;
             // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(442, 91);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(134, 28);
-            this.comboBox4.TabIndex = 5;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(370, 95);
+            this.label6.Location = new System.Drawing.Point(385, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 20);
             this.label6.TabIndex = 4;
@@ -637,16 +639,17 @@ namespace MineBase_final
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(109, 92);
+            this.comboBox3.Location = new System.Drawing.Point(182, 108);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(134, 28);
+            this.comboBox3.Size = new System.Drawing.Size(96, 28);
             this.comboBox3.TabIndex = 3;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(14, 94);
+            this.label5.Location = new System.Drawing.Point(12, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 20);
             this.label5.TabIndex = 2;
@@ -655,16 +658,17 @@ namespace MineBase_final
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(108, 46);
+            this.comboBox2.Location = new System.Drawing.Point(79, 13);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(136, 28);
             this.comboBox2.TabIndex = 1;
+            this.comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(15, 54);
+            this.label4.Location = new System.Drawing.Point(15, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 20);
             this.label4.TabIndex = 0;
@@ -681,13 +685,60 @@ namespace MineBase_final
             // 
             // Minerar
             // 
-            this.Minerar.Location = new System.Drawing.Point(657, 142);
+            this.Minerar.Location = new System.Drawing.Point(657, 185);
             this.Minerar.Name = "Minerar";
             this.Minerar.Size = new System.Drawing.Size(109, 37);
             this.Minerar.TabIndex = 10;
             this.Minerar.Text = "Minerar";
             this.Minerar.UseVisualStyleBackColor = true;
             this.Minerar.Visible = false;
+            this.Minerar.Click += new System.EventHandler(this.Minerar_Click);
+            // 
+            // AddInvent
+            // 
+            this.AddInvent.Location = new System.Drawing.Point(13, 108);
+            this.AddInvent.Name = "AddInvent";
+            this.AddInvent.Size = new System.Drawing.Size(94, 28);
+            this.AddInvent.TabIndex = 14;
+            this.AddInvent.Text = "Add";
+            this.AddInvent.UseVisualStyleBackColor = true;
+            this.AddInvent.Visible = false;
+            this.AddInvent.Click += new System.EventHandler(this.AddInvent_Click);
+            // 
+            // FilterInvent
+            // 
+            this.FilterInvent.AutoSize = true;
+            this.FilterInvent.Location = new System.Drawing.Point(128, 112);
+            this.FilterInvent.Name = "FilterInvent";
+            this.FilterInvent.Size = new System.Drawing.Size(48, 20);
+            this.FilterInvent.TabIndex = 15;
+            this.FilterInvent.Text = "Filter:";
+            // 
+            // FilterMundo
+            // 
+            this.FilterMundo.AutoSize = true;
+            this.FilterMundo.Location = new System.Drawing.Point(498, 111);
+            this.FilterMundo.Name = "FilterMundo";
+            this.FilterMundo.Size = new System.Drawing.Size(48, 20);
+            this.FilterMundo.TabIndex = 17;
+            this.FilterMundo.Text = "Filter:";
+            // 
+            // FilterMund
+            // 
+            this.FilterMund.FormattingEnabled = true;
+            this.FilterMund.Location = new System.Drawing.Point(552, 109);
+            this.FilterMund.Name = "FilterMund";
+            this.FilterMund.Size = new System.Drawing.Size(96, 28);
+            this.FilterMund.TabIndex = 16;
+            this.FilterMund.SelectedIndexChanged += new System.EventHandler(this.FilterMund_SelectedIndexChanged);
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(389, 111);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(103, 26);
+            this.textBox13.TabIndex = 18;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
             // 
             // Form1
             // 
@@ -695,7 +746,6 @@ namespace MineBase_final
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 523);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.CredentialsNotPanel);
             this.Controls.Add(this.ErrorPopUpPanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.loginPanel);
@@ -704,11 +754,11 @@ namespace MineBase_final
             this.Text = "Form1";
             this.loginPanel.ResumeLayout(false);
             this.loginPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.CredentialsNotPanel.ResumeLayout(false);
             this.CredentialsNotPanel.PerformLayout();
             this.ErrorPopUpPanel.ResumeLayout(false);
             this.ErrorPopUpPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -733,7 +783,6 @@ namespace MineBase_final
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxPersonagem;
-        private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label5;
@@ -781,6 +830,11 @@ namespace MineBase_final
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label FilterMundo;
+        private System.Windows.Forms.ComboBox FilterMund;
+        private System.Windows.Forms.Label FilterInvent;
+        private System.Windows.Forms.Button AddInvent;
     }
 }
 
