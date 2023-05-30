@@ -110,15 +110,12 @@ INSERT INTO TipoItem(ID,Nome) VALUES
 INSERT INTO Arma (ID_TipoItem, Durabilidade, Dano) VALUES
 	 (1, 250, 7),
   (2, 384, 5),
-  (5, 1561, 10),
-  (6, 384, 8),
   (61, 250, 3),
   (62, 1700, 5),
   (63, 700, 2),
   (67, 100, 1),
   (68, 238, 1),
-  (69, 60, 1),
-  (70, null, 1)
+  (69, 60, 1)
 
 INSERT INTO Comida (ID_TipoItem, Fome) VALUES
 	(4, 3),
