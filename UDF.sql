@@ -104,15 +104,24 @@ as
 			-- agora as propriedades (propriedade 1 e 2, se não tiver vai null)
 			case 
 				when A.ID_TipoItem is not null then A.Durabilidade
+				end
+			as Durabilidade,
+			case 
 				when C.ID_TipoItem is not null then C.Fome
+				end
+			as Fome,
+			case
 				when P.ID_TipoItem is not null then P.Efeito
 				end
-			as Propriedade1,
+			as Efeito,
 			case
 				when A.ID_TipoItem is not null then A.Dano
+			end
+			as Dano,
+			case
 				when P.ID_TipoItem is not null then P.Tempo
 			end
-			as Propriedade2
+			as Tempo
 			from Item I 
 		inner join TipoItem TI on TI.ID = I.ID_TipoItem
 		left join Arma A on A.ID_TipoItem = TI.ID
