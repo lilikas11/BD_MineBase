@@ -84,3 +84,22 @@ as
 	where ID_Bioma is null
  end
 go
+
+-- adicionar um item, pelo nome porque é unique
+create procedure AddItem(@nome_tipoItem varchar(32), @id_personagem int)
+as
+begin
+	declare @id_item int;
+	select @id_item = ID from TipoItem where Nome = @nome_tipoItem;
+
+	if @id_item is not null
+	begin
+		insert into Item values
+		(@id_item, @id_personagem)
+	end 
+	else 
+	begin
+		PRINT 'Nao existe esse item'
+	end
+end 
+go
