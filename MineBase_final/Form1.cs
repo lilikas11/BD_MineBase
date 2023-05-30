@@ -20,8 +20,9 @@ namespace MineBase_final
         private SoundPlayer splayer;
         private int ID_Personagem;
         private string nomeItemSelecionadoL1;
-        private string nomeItemSelecionadoL2;
+        private int ID_SelectedItemL2; // --> guardar ID em vez de nome
         private int ID_CurrentBioma;
+        private string nomeBioma;
         private List<InventarioDoMundo> inventarioMundo;
 
 
@@ -205,9 +206,8 @@ namespace MineBase_final
             if (!DatabaseHelper.verifySGBDConnection(cn2))
                 return;
             SqlCommand cmd2 = new SqlCommand();
-            inventarioMundo.Clear();
-            // ALTERAR ---> JÁ NÃO EXISTE ESTA FUNCTION, APENAS OS BIOMAS             
-            cmd2.CommandText = "SELECT * FROM dbo.MundoFunction()";
+            inventarioMundo.Clear();            
+            cmd2.CommandText = "SELECT * FROM dbo.BiomaFunction(1)";
             cmd2.Connection = cn2;
             try
             {
@@ -221,10 +221,7 @@ namespace MineBase_final
                         Nome = reader["Nome"].ToString(),
                         Tipo = reader["Tipo"].ToString(),
                     };
-                    inventarioMundo.Add(obj1);
-                   // inventarioMundo.Find(x => x.ID == 12)  ---> Aprende burra
-
-                    Console.WriteLine("ID: " + nomeElemento);
+                    inventarioMundo.Add(obj1);  // inventarioMundo.Find(x => x.ID == 12)  ---> Aprende burra                                              
                     listBox2.Items.Add(nomeElemento);
                 }
                 panel3.Visible = false;
@@ -240,6 +237,33 @@ namespace MineBase_final
             {
                 cn2.Close();
             }
+
+            var cn3 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn3))
+                return;
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandText = "SELECT ID, Nome FROM dbo.Bioma";
+            cmd3.Connection = cn3;
+            try
+            {
+                SqlDataReader reader = cmd3.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeBioma = reader["Nome"].ToString();
+                    comboBox2.Items.Add(nomeBioma);
+                }
+                //perguntar ao pedro como pôr um default
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn3.Close();
+            }
+
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -266,20 +290,145 @@ namespace MineBase_final
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox2.SelectedItem != null)
+            if (listBox2.SelectedIndex != -1)
             {
-                string selectedItem = listBox2.SelectedItem.ToString();
-                nomeItemSelecionadoL2 = selectedItem;
+                int selectedIndex = listBox2.SelectedIndex;
+                ID_SelectedItemL2 = selectedIndex;
                 infoButton2.Visible = true;
+
             }
         }
 
-        //SHOW STATS DO INVENTÁRIO
-        private void button1_Click(object sender, EventArgs e)
+        //SHOW STATS DO INVENTÁRIO 
+        private void infoButton_Click(object sender, EventArgs e)
         {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            if (inventarioMundo[ID_SelectedItemL2].Tipo == "Item")
+            {
+                cmd.CommandText = "SELECT * FROM dbo.InfoItem(@ID_Item)";
+            }
+            else if (inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")
+            {
+                cmd.CommandText = "SELECT * FROM dbo.InfoBloco(@ID_Item)";
+            }
+
+            cmd.Connection = cn;
+            try
+            {
+
+                panel1.Visible = true;
+            }
+            catch { }
+            finally { }
+        }
+      private void infoButton2_Click(object sender, EventArgs e)
+            {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            if (inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")
+            {
+                cmd.CommandText = "SELECT * FROM dbo.BlocoInfo(@ID_Item)";
+                cmd.Parameters.AddWithValue("@ID_Item", ID_SelectedItemL2);
+                cmd.Connection = cn;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        textBox10.Text = reader["Dureza"].ToString();
+                    }
+                    panel1.Visible = true;
+                }
+                catch (Exception ex) {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+
+                finally {
+                    cn.Close(); 
+                }
+            }
+
+            else if (inventarioMundo[ID_SelectedItemL2].Tipo == "Mob" || inventarioMundo[ID_SelectedItemL2].Tipo == "Villager")
+            {
+                cmd.CommandText = "SELECT * FROM dbo.MobInfo(@ID_Item)";
+                cmd.Parameters.AddWithValue("@ID_Item", ID_SelectedItemL2);
+                cmd.Connection = cn;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        textBox6.Text = reader["Personalidade"].ToString();
+                        textBox12.Text = reader["Dano_Facil"].ToString();
+                        textBox7.Text = reader["Dano_Normal"].ToString();
+                        textBox9.Text = reader["Dano_Dificil"].ToString();
+                        textBox8.Text = reader["Drop"].ToString();
+                        textBox11.Text = reader["Trabalho"].ToString();
+                    }
+                    panel1.Visible = true;
+                }
+                catch (Exception ex) {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+
+                finally {
+                    cn.Close();
+                }
+            }
+
+        }
+        //comboBox 2 ----> Biomas - perguntar ao pedroooo porque é que não funciona
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex != -1)
+            {
+                ID_CurrentBioma = comboBox2.SelectedIndex + 1;
+
+            }
+
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_CurrentBioma)";
+            cmd.Parameters.AddWithValue("@ID_CurrentBioma", ID_CurrentBioma);
+            cmd.Connection = cn;
+            try
+            {
+                inventarioMundo.Clear();
+                listBox2.Items.Clear();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeElemento = reader["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Nome = reader["Nome"].ToString(),
+                        Tipo = reader["Tipo"].ToString(),
+                    };
+                    inventarioMundo.Add(obj1);
+                    listBox2.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
 
         }
 
-
+      
     }
 }
