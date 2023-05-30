@@ -1,6 +1,3 @@
-Use MineBase
-GO
-
 
 ---INSERT INTO TABLES
 
