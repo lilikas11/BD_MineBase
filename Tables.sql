@@ -6,7 +6,7 @@
 
 
 CREATE TABLE Jogador(
-	[ID][int] NOT NULL PRIMARY KEY,
+	[ID][int] identity(1,1) PRIMARY KEY,
 	[Nome] [varchar](64) NOT NULL,
 	[Senha] [varchar](16) NOT NULL,
 	[Data_Nascimento][datetime] NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Mundo (
 GO
 
 CREATE TABLE Personagem(
-	[ID][int] NOT NULL PRIMARY KEY,
+	[ID][int] identity(1,1) PRIMARY KEY,
 	[Nome][varchar](64) NOT NULL UNIQUE,
 	[ID_Jogador][int] NOT NULL REFERENCES Jogador([ID]),
 	[Seed_Mundo][int] REFERENCES Mundo([Seed])
