@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 
 namespace MineBase_final
 {
@@ -18,6 +19,7 @@ namespace MineBase_final
     {
         private int ID_Jogador;
         private SoundPlayer splayer;
+        private SoundPlayer splayer2;
         private int ID_Personagem;
         private int ID_ItemSelectedL1;
         private int ID_SelectedItemL2;
@@ -25,6 +27,8 @@ namespace MineBase_final
         private string nomeBioma;
         private List<InventarioDoMundo> inventarioMundo;
         private List<InventarioDoMundo> inventarioPersonagem;
+        private List<int> Biomas;
+        private int trocaCheck;
 
 
 
@@ -35,6 +39,7 @@ namespace MineBase_final
             listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
             inventarioMundo = new List<InventarioDoMundo>();
             inventarioPersonagem = new List<InventarioDoMundo>();
+            Biomas = new List<int>();
             this.MouseClick += Form1_MouseClick;
         }
 
@@ -198,13 +203,41 @@ namespace MineBase_final
             {
                 cn.Close();
             }
+            var cn3 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn3))
+                return;
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandText = "SELECT ID, Nome FROM dbo.Bioma order by Nome asc";
+            cmd3.Connection = cn3;
+            try
+            {
+                SqlDataReader reader = cmd3.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeBioma = reader["Nome"].ToString();
+                    if (string.IsNullOrEmpty(comboBox2.Text)) comboBox2.Text = nomeBioma;
+                    if (ID_CurrentBioma == 0) ID_CurrentBioma = int.Parse(reader["ID"].ToString());
+                    Biomas.Add(int.Parse(reader["ID"].ToString()));
+                    comboBox2.Items.Add(nomeBioma);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn3.Close();
+            }
 
             var cn2 = DatabaseHelper.getSGBDConnection();
             if (!DatabaseHelper.verifySGBDConnection(cn2))
                 return;
             SqlCommand cmd2 = new SqlCommand();
             inventarioMundo.Clear();            
-            cmd2.CommandText = "SELECT * FROM dbo.BiomaFunction(1)";
+            cmd2.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_Bioma)";
+            cmd2.Parameters.AddWithValue("@ID_Bioma", ID_CurrentBioma);
             cmd2.Connection = cn2;
             try
             {
@@ -235,31 +268,7 @@ namespace MineBase_final
                 cn2.Close();
             }
 
-            var cn3 = DatabaseHelper.getSGBDConnection();
-            if (!DatabaseHelper.verifySGBDConnection(cn3))
-                return;
-            SqlCommand cmd3 = new SqlCommand();
-            cmd3.CommandText = "SELECT ID, Nome FROM dbo.Bioma order by Nome asc";
-            cmd3.Connection = cn3;
-            try
-            {
-                SqlDataReader reader = cmd3.ExecuteReader();
-                while (reader.Read())
-                {
-                    var nomeBioma = reader["Nome"].ToString();
-                    if(string.IsNullOrEmpty(comboBox2.Text)) comboBox2.Text = nomeBioma;
-                    comboBox2.Items.Add(nomeBioma);
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                cn3.Close();
-            }
+           
 
 
         }
@@ -293,6 +302,19 @@ namespace MineBase_final
                 int selectedIndex = listBox2.SelectedIndex;
                 ID_SelectedItemL2 = selectedIndex;
                 infoButton2.Visible = true;
+
+                if (inventarioMundo[ID_SelectedItemL2].Tipo == "Mob")
+                {
+                    MatarMob.Visible = true;
+                }
+                else if ((inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")){
+                    Minerar.Visible = true;
+                }
+
+                if (inventarioMundo[ID_SelectedItemL2].Tipo == "Villager")
+                {
+                    Troca.Visible = true;
+                }
 
             }
         }
@@ -422,6 +444,7 @@ namespace MineBase_final
                 finally {
                     cn.Close();
                 }
+
             }
 
         }
@@ -430,7 +453,7 @@ namespace MineBase_final
         {
             if (comboBox2.SelectedIndex != -1)
             {
-                ID_CurrentBioma = comboBox2.SelectedIndex + 1;
+                ID_CurrentBioma = Biomas[comboBox2.SelectedIndex];
 
             }
 
@@ -511,7 +534,60 @@ namespace MineBase_final
 
         private void NextDayButton_Click(object sender, EventArgs e)
         {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "EXEC PassarDia @ID_CurrentBioma";
+            cmd.Parameters.AddWithValue("@ID_CurrentBioma", ID_CurrentBioma);
+            cmd.Connection = cn;
 
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            var cn2 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn2))
+                return;
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_CurrentBioma)";
+            cmd2.Parameters.AddWithValue("@ID_CurrentBioma", ID_CurrentBioma);
+            cmd2.Connection = cn2;
+            try
+            {
+                inventarioMundo.Clear();
+                listBox2.Items.Clear();
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    var nomeElemento = reader2["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader2["ID"].ToString()),
+                        Nome = reader2["Nome"].ToString(),
+                        Tipo = reader2["Tipo"].ToString(),
+                    };
+                    inventarioMundo.Add(obj1);
+                    listBox2.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn2.Close();
+            }
         }
 
         private void MatarMob_Click(object sender, EventArgs e)
@@ -520,6 +596,9 @@ namespace MineBase_final
             int ID_Mob = inventarioMundo[ID_SelectedItemL2].ID;
             inventarioMundo.Clear();
             inventarioPersonagem.Clear();
+
+            splayer2 = new SoundPlayer(@"C:\Users\liarc\Downloads\Zombie.wav");
+            splayer2.Play();
 
             var cn = DatabaseHelper.getSGBDConnection();
             if (!DatabaseHelper.verifySGBDConnection(cn))
@@ -554,8 +633,8 @@ namespace MineBase_final
             cmd2.Connection = cn2;
             try
             {
-                inventarioMundo.Clear();
-                listBox2.Items.Clear();
+                inventarioPersonagem.Clear();
+                listBox1.Items.Clear();
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read())
                 {
@@ -614,12 +693,213 @@ namespace MineBase_final
                 cn3.Close();
             }
 
+            MatarMob.Visible = false;
+
 
         }
 
         private void Minerar_Click(object sender, EventArgs e)
         {
+            int ID_Bloco = inventarioMundo[ID_SelectedItemL2].ID;
+            inventarioMundo.Clear();
+            inventarioPersonagem.Clear();
 
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "EXEC Minerar @ID_Bloco, @ID_Personagem";
+            cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd.Parameters.AddWithValue("@ID_Bloco", ID_Bloco);
+            cmd.Connection = cn;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+
+
+            var cn2 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn2))
+                return;
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)";
+            cmd2.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd2.Connection = cn2;
+            try
+            {
+                inventarioPersonagem.Clear();
+                listBox1.Items.Clear();
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    var nomeElemento = reader2["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader2["ID"].ToString()),
+                        Nome = reader2["Nome"].ToString(),
+                        Tipo = reader2["Tipo"].ToString()
+                    };
+                    inventarioPersonagem.Add(obj1);
+                    listBox1.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn2.Close();
+            }
+
+
+            var cn3 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn3))
+                return;
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_CurrentBioma)";
+            cmd3.Parameters.AddWithValue("@ID_CurrentBioma", ID_CurrentBioma);
+            cmd3.Connection = cn3;
+            try
+            {
+                inventarioMundo.Clear();
+                listBox2.Items.Clear();
+                SqlDataReader reader3 = cmd3.ExecuteReader();
+                while (reader3.Read())
+                {
+                    var nomeElemento = reader3["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader3["ID"].ToString()),
+                        Nome = reader3["Nome"].ToString(),
+                        Tipo = reader3["Tipo"].ToString(),
+                    };
+                    inventarioMundo.Add(obj1);
+                    listBox2.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn3.Close();
+            }
+
+            Minerar.Visible = false;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+        }
+
+        private void Troca_Click(object sender, EventArgs e)
+        { //ver que conexão está aberta
+            int ID_Villager = inventarioMundo[ID_SelectedItemL2].ID;
+            inventarioPersonagem.Clear();
+            splayer2 = new SoundPlayer(@"C:\Users\liarc\Downloads\Villager.wav");
+            splayer2.Play();
+
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT dbo.PodeComprar(@ID_Personagem)";
+            cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd.Connection = cn;
+
+            try
+            {
+                trocaCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            if (trocaCheck == 1)
+            {
+
+                var cn3 = DatabaseHelper.getSGBDConnection();
+                if (!DatabaseHelper.verifySGBDConnection(cn3))
+                    return;
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.CommandText = "EXEC dbo.EfetuaCompra @ID_Personagem, @ID_Villager";
+                cmd3.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+                cmd3.Parameters.AddWithValue("@ID_Villager", ID_Villager);
+                cmd3.Connection = cn3;
+                try
+                {
+                    cmd3.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    cn3.Close();
+                }
+            }
+
+            else
+            {
+                string mensagemErro = "Não existem Esmeraldas no inventário da personagem! Não é possível efetuar troca!";
+                string tituloErro = "Erro";
+                MessageBox.Show(mensagemErro, tituloErro, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            var cn4 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn4))
+                return;
+            SqlCommand cmd4 = new SqlCommand();
+            cmd4.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)";
+            cmd4.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd4.Connection = cn4;
+            try
+            {
+                inventarioPersonagem.Clear();
+                listBox1.Items.Clear();
+                SqlDataReader reader4 = cmd4.ExecuteReader();
+                while (reader4.Read())
+                {
+                    var nomeElemento = reader4["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader4["ID"].ToString()),
+                        Nome = reader4["Nome"].ToString(),
+                        Tipo = reader4["Tipo"].ToString()
+                    };
+
+                    inventarioPersonagem.Add(obj1);
+                    listBox1.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn4.Close();
+            }
         }
     }
 }
