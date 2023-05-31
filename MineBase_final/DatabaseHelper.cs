@@ -13,9 +13,10 @@ namespace MineBase_final
         public static SqlConnection getSGBDConnection()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "localhost";
-            builder.IntegratedSecurity = true;
-            builder.InitialCatalog = "MineBase";
+            builder.DataSource = "tcp:mednat.ieeta.pt\\SQLSERVER,8101";
+            builder.InitialCatalog = "p8g5";
+            builder.UserID = "p8g5";
+            builder.Password = "pro.gram.mer";
             return new SqlConnection(builder.ConnectionString);
         }
 

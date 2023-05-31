@@ -50,6 +50,12 @@
     <Compile Include="Arma.cs" />
     <Compile Include="Bloco.cs" />
     <Compile Include="Aquisicao.cs" />
+    <Compile Include="InventarioDoMundo.cs" />
+    <Compile Include="MineBaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MineBaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Villager.cs" />
     <Compile Include="MobComum.cs" />
     <Compile Include="Mob.cs" />
@@ -82,6 +88,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="MineBaseDataSet.xsc">
+      <DependentUpon>MineBaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MineBaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MineBaseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MineBaseDataSet.xss">
+      <DependentUpon>MineBaseDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

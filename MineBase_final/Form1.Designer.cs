@@ -1,4 +1,4 @@
-namespace MineBase_final
+﻿namespace MineBase_final
 {
     partial class Form1
     {
@@ -75,6 +75,11 @@ namespace MineBase_final
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.FilterMundo = new System.Windows.Forms.Label();
+            this.FilterMund = new System.Windows.Forms.ComboBox();
+            this.FilterInvent = new System.Windows.Forms.Label();
+            this.AddInvent = new System.Windows.Forms.Button();
             this.infoButton2 = new System.Windows.Forms.Button();
             this.NextDayButton = new System.Windows.Forms.Button();
             this.infoButton = new System.Windows.Forms.Button();
@@ -88,11 +93,6 @@ namespace MineBase_final
             this.label4 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.Minerar = new System.Windows.Forms.Button();
-            this.AddInvent = new System.Windows.Forms.Button();
-            this.FilterInvent = new System.Windows.Forms.Label();
-            this.FilterMundo = new System.Windows.Forms.Label();
-            this.FilterMund = new System.Windows.Forms.ComboBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
             this.loginPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.CredentialsNotPanel.SuspendLayout();
@@ -172,7 +172,7 @@ namespace MineBase_final
             // 
             this.CredentialsNotPanel.Controls.Add(this.TryAgain2Button);
             this.CredentialsNotPanel.Controls.Add(this.label8);
-            this.CredentialsNotPanel.Location = new System.Drawing.Point(0, 0);
+            this.CredentialsNotPanel.Location = new System.Drawing.Point(9, 12);
             this.CredentialsNotPanel.Name = "CredentialsNotPanel";
             this.CredentialsNotPanel.Size = new System.Drawing.Size(782, 472);
             this.CredentialsNotPanel.TabIndex = 7;
@@ -201,13 +201,12 @@ namespace MineBase_final
             // ErrorPopUpPanel
             // 
             this.ErrorPopUpPanel.Controls.Add(this.TryAgainButton);
-            this.ErrorPopUpPanel.Controls.Add(this.CredentialsNotPanel);
             this.ErrorPopUpPanel.Controls.Add(this.label7);
             this.ErrorPopUpPanel.Location = new System.Drawing.Point(12, 12);
             this.ErrorPopUpPanel.Name = "ErrorPopUpPanel";
             this.ErrorPopUpPanel.Size = new System.Drawing.Size(782, 472);
             this.ErrorPopUpPanel.TabIndex = 6;
-            this.ErrorPopUpPanel.Visible = false;           
+            this.ErrorPopUpPanel.Visible = false;
             // 
             // TryAgainButton
             // 
@@ -259,7 +258,7 @@ namespace MineBase_final
             this.panel1.Controls.Add(this.Durabilidade);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(9, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(813, 504);
             this.panel1.TabIndex = 8;
@@ -503,7 +502,7 @@ namespace MineBase_final
             this.panel3.Controls.Add(this.comboBoxPersonagem);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(12, 12);
+            this.panel3.Location = new System.Drawing.Point(12, 10);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(782, 471);
             this.panel3.TabIndex = 2;
@@ -563,6 +562,51 @@ namespace MineBase_final
             this.panel2.Size = new System.Drawing.Size(776, 426);
             this.panel2.TabIndex = 1;
             this.panel2.Visible = false;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(389, 111);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(103, 26);
+            this.textBox13.TabIndex = 18;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
+            // 
+            // FilterMundo
+            // 
+            this.FilterMundo.AutoSize = true;
+            this.FilterMundo.Location = new System.Drawing.Point(498, 111);
+            this.FilterMundo.Name = "FilterMundo";
+            this.FilterMundo.Size = new System.Drawing.Size(48, 20);
+            this.FilterMundo.TabIndex = 17;
+            this.FilterMundo.Text = "Filter:";
+            // 
+            // FilterMund
+            // 
+            this.FilterMund.FormattingEnabled = true;
+            this.FilterMund.Location = new System.Drawing.Point(552, 109);
+            this.FilterMund.Name = "FilterMund";
+            this.FilterMund.Size = new System.Drawing.Size(96, 28);
+            this.FilterMund.TabIndex = 16;
+            this.FilterMund.SelectedIndexChanged += new System.EventHandler(this.FilterMund_SelectedIndexChanged);
+            // 
+            // FilterInvent
+            // 
+            this.FilterInvent.AutoSize = true;
+            this.FilterInvent.Location = new System.Drawing.Point(128, 112);
+            this.FilterInvent.Name = "FilterInvent";
+            this.FilterInvent.Size = new System.Drawing.Size(48, 20);
+            this.FilterInvent.TabIndex = 15;
+            this.FilterInvent.Text = "Filter:";
+            // 
+            // AddInvent
+            // 
+            this.AddInvent.Location = new System.Drawing.Point(13, 108);
+            this.AddInvent.Name = "AddInvent";
+            this.AddInvent.Size = new System.Drawing.Size(94, 28);
+            this.AddInvent.TabIndex = 14;
+            this.AddInvent.Text = "Add";
+            this.AddInvent.UseVisualStyleBackColor = true;
+            this.AddInvent.Click += new System.EventHandler(this.AddInvent_Click);
             // 
             // infoButton2
             // 
@@ -662,7 +706,7 @@ namespace MineBase_final
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(136, 28);
             this.comboBox2.TabIndex = 1;
-            this.comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(comboBox2_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -694,58 +738,13 @@ namespace MineBase_final
             this.Minerar.Visible = false;
             this.Minerar.Click += new System.EventHandler(this.Minerar_Click);
             // 
-            // AddInvent
-            // 
-            this.AddInvent.Location = new System.Drawing.Point(13, 108);
-            this.AddInvent.Name = "AddInvent";
-            this.AddInvent.Size = new System.Drawing.Size(94, 28);
-            this.AddInvent.TabIndex = 14;
-            this.AddInvent.Text = "Add";
-            this.AddInvent.UseVisualStyleBackColor = true;
-            this.AddInvent.Visible = false;
-            this.AddInvent.Click += new System.EventHandler(this.AddInvent_Click);
-            // 
-            // FilterInvent
-            // 
-            this.FilterInvent.AutoSize = true;
-            this.FilterInvent.Location = new System.Drawing.Point(128, 112);
-            this.FilterInvent.Name = "FilterInvent";
-            this.FilterInvent.Size = new System.Drawing.Size(48, 20);
-            this.FilterInvent.TabIndex = 15;
-            this.FilterInvent.Text = "Filter:";
-            // 
-            // FilterMundo
-            // 
-            this.FilterMundo.AutoSize = true;
-            this.FilterMundo.Location = new System.Drawing.Point(498, 111);
-            this.FilterMundo.Name = "FilterMundo";
-            this.FilterMundo.Size = new System.Drawing.Size(48, 20);
-            this.FilterMundo.TabIndex = 17;
-            this.FilterMundo.Text = "Filter:";
-            // 
-            // FilterMund
-            // 
-            this.FilterMund.FormattingEnabled = true;
-            this.FilterMund.Location = new System.Drawing.Point(552, 109);
-            this.FilterMund.Name = "FilterMund";
-            this.FilterMund.Size = new System.Drawing.Size(96, 28);
-            this.FilterMund.TabIndex = 16;
-            this.FilterMund.SelectedIndexChanged += new System.EventHandler(this.FilterMund_SelectedIndexChanged);
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(389, 111);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(103, 26);
-            this.textBox13.TabIndex = 18;
-            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 523);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.CredentialsNotPanel);
             this.Controls.Add(this.ErrorPopUpPanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.loginPanel);
