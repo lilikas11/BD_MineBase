@@ -4,7 +4,7 @@ CREATE VIEW InventárioView AS
 select I.ID, TI.Nome AS Nome, I.ID_Personagem, 'Item' as Tipo
 from Item I
 -- aqui faz-se o inner join
-inner join TipoItem TI on I.ID = TI.ID
+inner join TipoItem TI on I.ID_TipoItem = TI.ID
 where I.ID_Personagem is not null
 
 union all
