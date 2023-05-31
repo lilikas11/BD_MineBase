@@ -19,11 +19,12 @@ namespace MineBase_final
         private int ID_Jogador;
         private SoundPlayer splayer;
         private int ID_Personagem;
-        private string nomeItemSelecionadoL1;
+        private int ID_ItemSelectedL1;
         private int ID_SelectedItemL2;
         private int ID_CurrentBioma;
         private string nomeBioma;
         private List<InventarioDoMundo> inventarioMundo;
+        private List<InventarioDoMundo> inventarioPersonagem;
 
 
 
@@ -33,10 +34,10 @@ namespace MineBase_final
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
             inventarioMundo = new List<InventarioDoMundo>();
+            inventarioPersonagem = new List<InventarioDoMundo>();
             this.MouseClick += Form1_MouseClick;
         }
 
-        //pedir ID!!!! Só temos o nome
         private void login_Click(object sender, EventArgs e)
         {
             var cn = DatabaseHelper.getSGBDConnection();
@@ -175,8 +176,7 @@ namespace MineBase_final
             var cn = DatabaseHelper.getSGBDConnection();
             if (!DatabaseHelper.verifySGBDConnection(cn))
                 return;
-            SqlCommand cmd = new SqlCommand();
-                         
+            SqlCommand cmd = new SqlCommand();                        
             cmd.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)"; 
             cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
             cmd.Connection = cn;
@@ -185,9 +185,15 @@ namespace MineBase_final
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    var nomeItem = reader["Nome"].ToString();
-                    Console.WriteLine("ID: " + nomeItem);
-                    listBox1.Items.Add(nomeItem);
+                    var nomeElemento = reader["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Nome = reader["Nome"].ToString(),
+                        Tipo = reader["Tipo"].ToString()
+                    };
+                    inventarioPersonagem.Add(obj1);  // inventarioMundo.Find(x => x.ID == 12)  ---> Aprende burra                                              
+                    listBox1.Items.Add(nomeElemento);
                 }
                 panel3.Visible = false;
                 panel2.Visible = true;
@@ -253,7 +259,7 @@ namespace MineBase_final
                     if(string.IsNullOrEmpty(comboBox2.Text)) comboBox2.Text = nomeBioma;
                     comboBox2.Items.Add(nomeBioma);
                 }
-                //perguntar ao pedro como pôr um default
+                
             }
             catch (Exception ex)
             {
@@ -269,10 +275,10 @@ namespace MineBase_final
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null)
+            if (listBox1.SelectedIndex != -1)
             {
-                string selectedItem = listBox1.SelectedItem.ToString();
-                nomeItemSelecionadoL1 = selectedItem;
+                int selectedItem = listBox1.SelectedIndex;
+                ID_ItemSelectedL1 = selectedItem;
                 infoButton.Visible = true;
                 
             }
@@ -307,35 +313,74 @@ namespace MineBase_final
             if (!DatabaseHelper.verifySGBDConnection(cn))
                 return;
             SqlCommand cmd = new SqlCommand();
-            if (inventarioMundo[ID_SelectedItemL2].Tipo == "Item")
+            if (inventarioPersonagem[ID_ItemSelectedL1].Tipo == "Item")
             {
-                cmd.CommandText = "SELECT * FROM dbo.InfoItem(@ID_Item)";
-            }
-            else if (inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")
-            {
-                cmd.CommandText = "SELECT * FROM dbo.InfoBloco(@ID_Item)";
-            }
+                int ID_Item = inventarioPersonagem[ID_ItemSelectedL1].ID;
+                cmd.CommandText = "SELECT * FROM dbo.ItemInfo(@ID_Item)";
+                cmd.Parameters.AddWithValue("@ID_Item", ID_Item);
 
-            cmd.Connection = cn;
-            try
-            {
+                cmd.Connection = cn;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        textBox1.Text = reader["Nome"].ToString();
+                        textDurabilidade.Text = reader["Durabilidade"].ToString();
+                        textBox2.Text = reader["Dano"].ToString();
+                        textBox3.Text = reader["Fome"].ToString();
+                        textBox4.Text = reader["Tempo"].ToString();
+                        textBox5.Text = reader["Efeito"].ToString();
+                    }
+                    panel1.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
 
-                panel1.Visible = true;
+                finally
+                {
+                    cn.Close();
+                }
             }
-            catch { }
-            finally { }
+            else if (inventarioPersonagem[ID_ItemSelectedL1].Tipo == "Bloco")
+            {
+                int ID_Bloco = inventarioPersonagem[ID_ItemSelectedL1].ID;
+                cmd.CommandText = "SELECT * FROM dbo.BlocoInfo(@ID_Bloco)";
+                cmd.Parameters.AddWithValue("@ID_Bloco", ID_Bloco);
+                cmd.Connection = cn;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        textBox1.Text = reader["Nome"].ToString();
+                        textBox10.Text = reader["Dureza"].ToString();
+                    }
+                    panel1.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+
+                finally
+                {
+                    cn.Close();
+                }
+            }
         }
       private void infoButton2_Click(object sender, EventArgs e)
             {
-            int ID_ItemSelectedDB = ID_SelectedItemL2 + 1;
             var cn = DatabaseHelper.getSGBDConnection();
             if (!DatabaseHelper.verifySGBDConnection(cn))
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            if (inventarioMundo[ID_ItemSelectedDB].Tipo == "Bloco")
+            if (inventarioMundo[ID_SelectedItemL2].Tipo == "Bloco")
             {
-                int ID_Bloco = inventarioMundo[ID_ItemSelectedDB].ID;
+                int ID_Bloco = inventarioMundo[ID_SelectedItemL2].ID;
                 cmd.CommandText = "SELECT * FROM dbo.BlocoInfo(@ID_Bloco)";
                 cmd.Parameters.AddWithValue("@ID_Bloco", ID_Bloco);
                 cmd.Connection = cn;
@@ -358,9 +403,9 @@ namespace MineBase_final
                 }
             }
 
-            else if (inventarioMundo[ID_ItemSelectedDB].Tipo == "Mob" || inventarioMundo[ID_ItemSelectedDB].Tipo == "Villager")
+            else if (inventarioMundo[ID_SelectedItemL2].Tipo == "Mob" || inventarioMundo[ID_SelectedItemL2].Tipo == "Villager")
             {
-                int ID_Mob = inventarioMundo[ID_ItemSelectedDB].ID;
+                int ID_Mob = inventarioMundo[ID_SelectedItemL2].ID;
                 cmd.CommandText = "SELECT * FROM dbo.MobInfo(@ID_Mob)";
                 cmd.Parameters.AddWithValue("@ID_Mob", ID_Mob);
                 cmd.Connection = cn;
