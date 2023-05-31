@@ -69,7 +69,7 @@ namespace MineBase_final
                         if (!reader.IsDBNull(0))
                         {
                             // Access the values returned by the TVF e it is an int
-                            ID_Jogador = reader.GetInt32(0);
+                            ID_Jogador = int.Parse(reader["ID"].ToString()); // ver se isto funcionou
                             Console.WriteLine("ID: " + ID_Jogador);
                             login = true;
                             // Close the reader
@@ -149,15 +149,6 @@ namespace MineBase_final
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void TryAgainButton_Click(object sender, EventArgs e)
         {
@@ -525,6 +516,104 @@ namespace MineBase_final
 
         private void MatarMob_Click(object sender, EventArgs e)
         {
+            //apagar tudo dos dois inventários 
+            int ID_Mob = inventarioMundo[ID_SelectedItemL2].ID;
+            inventarioMundo.Clear();
+            inventarioPersonagem.Clear();
+
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "EXEC Matar @ID_Jogador, @ID_Mob";
+            cmd.Parameters.AddWithValue("@ID_Jogador", ID_Jogador);
+            cmd.Parameters.AddWithValue("@ID_Mob", ID_Mob);
+            cmd.Connection = cn;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+
+
+            var cn2 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn2))
+                return;
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)";
+            cmd2.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd2.Connection = cn2;
+            try
+            {
+                inventarioMundo.Clear();
+                listBox2.Items.Clear();
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    var nomeElemento = reader2["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader2["ID"].ToString()),
+                        Nome = reader2["Nome"].ToString(),
+                        Tipo = reader2["Tipo"].ToString()
+                    };
+                    inventarioPersonagem.Add(obj1);                                            
+                    listBox1.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn2.Close();
+            }
+
+
+            var cn3 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn3))
+                return;
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_CurrentBioma)";
+            cmd3.Parameters.AddWithValue("@ID_CurrentBioma", ID_CurrentBioma);
+            cmd3.Connection = cn3;
+            try
+            {
+                inventarioMundo.Clear();
+                listBox2.Items.Clear();
+                SqlDataReader reader3 = cmd3.ExecuteReader();
+                while (reader3.Read())
+                {
+                    var nomeElemento = reader3["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader3["ID"].ToString()),
+                        Nome = reader3["Nome"].ToString(),
+                        Tipo = reader3["Tipo"].ToString(),
+                    };
+                    inventarioMundo.Add(obj1);
+                    listBox2.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn3.Close();
+            }
+
 
         }
 
