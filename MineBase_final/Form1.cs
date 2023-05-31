@@ -23,6 +23,7 @@ namespace MineBase_final
         private int ID_SelectedItemL2;
         private int ID_CurrentBioma;
         private string nomeBioma;
+        private int Nome_ItemSelectedL3;
         private List<InventarioDoMundo> inventarioMundo;
         private List<InventarioDoMundo> inventarioPersonagem;
 
@@ -491,8 +492,35 @@ namespace MineBase_final
 
         private void AddInvent_Click(object sender, EventArgs e)
         {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "select Nome from dbo.TipoItem";
+            cmd.Connection = cn;
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var nomeElemento = reader["Nome"].ToString();
+                    listBox3.Items.Add(nomeElemento);
+                }
+                panel4.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
 
+            finally
+            {
+                cn.Close();
+            }
+            
         }
+
+
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -620,6 +648,93 @@ namespace MineBase_final
         private void Minerar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddButon2_Click(object sender, EventArgs e)
+        {
+            var cn = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn))
+                return;
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = cn;
+                cmd.CommandText = "EXEC dbo.AddItem @id_tipoItem, @id_personagem";
+                Nome_ItemSelectedL3 += 1;
+                cmd.Parameters.AddWithValue("@id_tipoItem", Nome_ItemSelectedL3);
+                cmd.Parameters.AddWithValue("@id_personagem", ID_Personagem);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to add item to inventory. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    cn.Close();
+                }
+            }
+            panel4.Visible = false;
+            var cn4 = DatabaseHelper.getSGBDConnection();
+            if (!DatabaseHelper.verifySGBDConnection(cn4))
+                return;
+            SqlCommand cmd4 = new SqlCommand();
+            cmd4.CommandText = "SELECT * FROM dbo.Inventário (@ID_Personagem)";
+            cmd4.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+            cmd4.Connection = cn4;
+            try
+            {
+                inventarioPersonagem.Clear();
+                listBox1.Items.Clear();
+                SqlDataReader reader4 = cmd4.ExecuteReader();
+                while (reader4.Read())
+                {
+                    var nomeElemento = reader4["Nome"].ToString();
+                    var obj1 = new InventarioDoMundo
+                    {
+                        ID = int.Parse(reader4["ID"].ToString()),
+                        Nome = reader4["Nome"].ToString(),
+                        Tipo = reader4["Tipo"].ToString()
+                    };
+
+                    inventarioPersonagem.Add(obj1);
+                    listBox1.Items.Add(nomeElemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn4.Close();
+            }
+
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                int selectedItem = listBox3.SelectedIndex;
+                Nome_ItemSelectedL3 = selectedItem;
+                AddButon2.Visible = true;
+
+            }
         }
     }
 }

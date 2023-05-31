@@ -9,3 +9,14 @@ C:\Users\liarc\Desktop\MineBase_final\obj\Debug\MineBase_final.csproj.GenerateRe
 C:\Users\liarc\Desktop\MineBase_final\obj\Debug\MineBase_final.csproj.CoreCompileInputs.cache
 C:\Users\liarc\Desktop\MineBase_final\obj\Debug\MineBase_final.exe
 C:\Users\liarc\Desktop\MineBase_final\obj\Debug\MineBase_final.pdb
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\bin\Debug\MineBase_final.exe.config
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\bin\Debug\MineBase_final.exe
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\bin\Debug\MineBase_final.pdb
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.csproj.AssemblyReference.cache
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.csproj.SuggestedBindingRedirects.cache
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.Form1.resources
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.Properties.Resources.resources
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.csproj.GenerateResource.cache
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.exe
+C:\Users\ASUS\Source\Repos\BD_MineBase\MineBase_final\obj\Debug\MineBase_final.pdb
