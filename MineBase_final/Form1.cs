@@ -204,10 +204,12 @@ namespace MineBase_final
                 comboBox3.Items.Add("comida");
                 comboBox3.Items.Add("poção");
                 comboBox3.Items.Add("item comum");
+                comboBox3.Text = "tudo";
                 FilterMund.Items.Add("Tudo");
                 FilterMund.Items.Add("Bloco");
                 FilterMund.Items.Add("Mob");
                 FilterMund.Items.Add("Villager");
+                FilterMund.Text = "tudo";
 
             }
             catch (Exception ex)
@@ -1103,6 +1105,7 @@ namespace MineBase_final
             {
                 cn4.Close();
             }
+            Troca.Visible = false;
         }
 
         private void label12_Click(object sender, EventArgs e)
