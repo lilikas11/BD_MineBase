@@ -23,12 +23,13 @@ namespace MineBase_final
         private int ID_Personagem;
         private int ID_ItemSelectedL1;
         private int ID_SelectedItemL2;
+        private int ID_ItemSelectedL3;
         private int ID_CurrentBioma;
         private string nomeBioma;
         private int Nome_ItemSelectedL3;
         private List<InventarioDoMundo> inventarioMundo;
         private List<InventarioDoMundo> inventarioPersonagem;
-        private List<int> Biomas;
+        private List<int> Biomas, Personagens;
         private int trocaCheck;
 
 
@@ -41,6 +42,7 @@ namespace MineBase_final
             inventarioMundo = new List<InventarioDoMundo>();
             inventarioPersonagem = new List<InventarioDoMundo>();
             Biomas = new List<int>();
+            Personagens = new List<int>();
             this.MouseClick += Form1_MouseClick;
         }
 
@@ -124,6 +126,7 @@ namespace MineBase_final
                     var nomePersonagem = reader2["Nome"].ToString();
                     Console.WriteLine("ID: " + ID_Personagem);
                     comboBoxPersonagem.Items.Add(nomePersonagem);
+                    Personagens.Add(ID_Personagem);
                 }
                 
             }
@@ -194,6 +197,19 @@ namespace MineBase_final
                 }
                 panel3.Visible = false;
                 panel2.Visible = true;
+                comboBox3.Items.Add("tudo");
+                comboBox3.Items.Add("bloco");
+                comboBox3.Items.Add("item");
+                comboBox3.Items.Add("arma");
+                comboBox3.Items.Add("comida");
+                comboBox3.Items.Add("poção");
+                comboBox3.Items.Add("item comum");
+                comboBox3.Text = "tudo";
+                FilterMund.Items.Add("Tudo");
+                FilterMund.Items.Add("Bloco");
+                FilterMund.Items.Add("Mob");
+                FilterMund.Items.Add("Villager");
+                FilterMund.Text = "tudo";
 
             }
             catch (Exception ex)
@@ -273,8 +289,17 @@ namespace MineBase_final
 
 
         }
+        private void comboBoxPersonagem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxPersonagem.SelectedIndex != -1)
+            {
+                int selectedIndex = comboBoxPersonagem.SelectedIndex;
+                ID_ItemSelectedL3 = selectedIndex;
+                ID_Personagem = Personagens[selectedIndex];
+            }
+        }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+            private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
             {
@@ -521,6 +546,7 @@ namespace MineBase_final
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "select Nome from dbo.TipoItem";
             cmd.Connection = cn;
+            listBox3.Items.Clear();
             try
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -544,10 +570,84 @@ namespace MineBase_final
         }
 
 
-
+        //filtro inventario
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var Tipo = comboBox3.SelectedItem;
 
+            if (comboBox3.SelectedIndex == 0) {
+                var cn3 = DatabaseHelper.getSGBDConnection();
+                if (!DatabaseHelper.verifySGBDConnection(cn3))
+                    return;
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.CommandText = "SELECT * FROM dbo.Inventário(@ID_Personagem)";
+                cmd3.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+                cmd3.Connection = cn3;
+                try
+                {
+                    inventarioPersonagem.Clear();
+                    listBox1.Items.Clear();
+                    SqlDataReader reader3 = cmd3.ExecuteReader();
+                    while (reader3.Read())
+                    {
+                        var nomeElemento = reader3["Nome"].ToString();
+                        var obj1 = new InventarioDoMundo
+                        {
+                            ID = int.Parse(reader3["ID"].ToString()),
+                            Nome = reader3["Nome"].ToString(),
+                            Tipo = reader3["Tipo"].ToString(),
+                        };
+                        inventarioPersonagem.Add(obj1);
+                        listBox1.Items.Add(nomeElemento);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    cn3.Close();
+                }
+            }
+            else {
+                var cn = DatabaseHelper.getSGBDConnection();
+                if (!DatabaseHelper.verifySGBDConnection(cn))
+                    return;
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "SELECT * FROM FiltroInventario(@ID_Personagem, @Tipo)";
+                cmd.Parameters.AddWithValue("@ID_Personagem", ID_Personagem);
+                cmd.Parameters.AddWithValue("@Tipo", Tipo);
+                cmd.Connection = cn;
+                try
+                {
+                    inventarioPersonagem.Clear();
+                    listBox1.Items.Clear();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var nomeElemento = reader["Nome"].ToString();
+                        var obj1 = new InventarioDoMundo
+                        {
+                            ID = int.Parse(reader["ID"].ToString()),
+                            Nome = reader["Nome"].ToString(),
+                            Tipo = Tipo.ToString()
+                        };
+                        inventarioPersonagem.Add(obj1);
+                        listBox1.Items.Add(nomeElemento);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+
+                finally
+                {
+                    cn.Close();
+                }
+            }
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
@@ -555,9 +655,86 @@ namespace MineBase_final
 
         }
 
+        //filtro mundo
         private void FilterMund_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var Tipo = FilterMund.SelectedItem;
 
+            if (FilterMund.SelectedIndex == 0)
+            {
+                var cn3 = DatabaseHelper.getSGBDConnection();
+                if (!DatabaseHelper.verifySGBDConnection(cn3))
+                    return;
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.CommandText = "SELECT * FROM dbo.BiomaFunction(@ID_Bioma)";
+                cmd3.Parameters.AddWithValue("@ID_Bioma", ID_CurrentBioma);
+                cmd3.Connection = cn3;
+                try
+                {
+                    inventarioMundo.Clear();
+                    listBox2.Items.Clear();
+                    SqlDataReader reader3 = cmd3.ExecuteReader();
+                    while (reader3.Read())
+                    {
+                        var nomeElemento = reader3["Nome"].ToString();
+                        var obj1 = new InventarioDoMundo
+                        {
+                            ID = int.Parse(reader3["ID"].ToString()),
+                            Nome = reader3["Nome"].ToString(),
+                            Tipo = reader3["Tipo"].ToString(),
+                        };
+                        inventarioMundo.Add(obj1);
+                        listBox2.Items.Add(nomeElemento);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    cn3.Close();
+                }
+            }
+            else
+            {
+                var cn = DatabaseHelper.getSGBDConnection();
+                if (!DatabaseHelper.verifySGBDConnection(cn))
+                    return;
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "SELECT * FROM FiltroMundo(@ID_Bioma, @Tipo)";
+                cmd.Parameters.AddWithValue("@ID_Bioma", ID_CurrentBioma);
+                cmd.Parameters.AddWithValue("@Tipo", Tipo);
+                cmd.Connection = cn;
+                try
+                {
+                    inventarioMundo.Clear();
+                    listBox2.Items.Clear();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var nomeElemento = reader["Nome"].ToString();
+                        var obj1 = new InventarioDoMundo
+                        {
+                            ID = int.Parse(reader["ID"].ToString()),
+                            Nome = reader["Nome"].ToString(),
+                            Tipo = Tipo.ToString()
+                        };
+                        inventarioMundo.Add(obj1);
+                        listBox2.Items.Add(nomeElemento);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+
+                finally
+                {
+                    cn.Close();
+                }
+            }
         }
 
         private void NextDayButton_Click(object sender, EventArgs e)
@@ -928,6 +1105,7 @@ namespace MineBase_final
             {
                 cn4.Close();
             }
+            Troca.Visible = false;
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -1008,7 +1186,7 @@ namespace MineBase_final
 
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
+            if (listBox3.SelectedIndex != -1)
             {
                 int selectedItem = listBox3.SelectedIndex;
                 Nome_ItemSelectedL3 = selectedItem;
