@@ -88,7 +88,7 @@ create procedure AddItem(@nome_tipoItem varchar(32), @id_personagem int)
 as
 begin
 	declare @id_item int;
-	select @id_item = ID from TipoItem where Nome = @nome_tipoItem;
+	select @id_item = @id_tipoItem;
 
 	if @id_item is not null
 	begin
