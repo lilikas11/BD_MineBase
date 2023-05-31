@@ -119,6 +119,7 @@ INSERT INTO Comida (ID_TipoItem, Fome) VALUES
 	(14, 1),
 	(15, 1),
 	(27, 1),
+	(41, 5),
 	(44, 3),
 	(53, 4),
 	(59, 1),
@@ -138,7 +139,8 @@ INSERT INTO Pocao (ID_TipoItem, Tempo, Efeito) VALUES
 	(78, 180, 'Modelo da personagem desaparece')
 
 INSERT INTO ItemComum (ID_TipoItem) VALUES
-(3),
+(5),
+(6),
 (7),
 (8),
 (9),
@@ -157,7 +159,6 @@ INSERT INTO ItemComum (ID_TipoItem) VALUES
 (24),
 (25),
 (26),
-(27),
 (28),
 (29),
 (30),
@@ -171,7 +172,6 @@ INSERT INTO ItemComum (ID_TipoItem) VALUES
 (38),
 (39),
 (40),
-(41),
 (42),
 (43),
 (45),
@@ -185,9 +185,10 @@ INSERT INTO ItemComum (ID_TipoItem) VALUES
 (54),
 (55),
 (56),
+(57),
 (58),
-(59),
 (60),
+(70),
 (79),
 (80),
 (81)
