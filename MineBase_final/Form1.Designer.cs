@@ -37,11 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.CredentialsNotPanel = new System.Windows.Forms.Panel();
+            this.TryAgain2Button = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.ErrorPopUpPanel = new System.Windows.Forms.Panel();
             this.TryAgainButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.TryAgain2Button = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -117,7 +117,7 @@
             this.loginPanel.Controls.Add(this.label2);
             this.loginPanel.Controls.Add(this.label1);
             this.loginPanel.Location = new System.Drawing.Point(7, 2);
-            this.loginPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loginPanel.Margin = new System.Windows.Forms.Padding(2);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(521, 302);
             this.loginPanel.TabIndex = 1;
@@ -126,7 +126,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(196, 17);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 72);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -136,7 +136,7 @@
             // login
             // 
             this.login.Location = new System.Drawing.Point(199, 171);
-            this.login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.login.Margin = new System.Windows.Forms.Padding(2);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(78, 28);
             this.login.TabIndex = 4;
@@ -147,7 +147,7 @@
             // PasswordTextBox
             // 
             this.PasswordTextBox.Location = new System.Drawing.Point(171, 136);
-            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(212, 20);
@@ -156,7 +156,7 @@
             // EmailTextBox
             // 
             this.EmailTextBox.Location = new System.Drawing.Point(171, 104);
-            this.EmailTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EmailTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.Size = new System.Drawing.Size(212, 20);
             this.EmailTextBox.TabIndex = 2;
@@ -186,49 +186,16 @@
             this.CredentialsNotPanel.Controls.Add(this.TryAgain2Button);
             this.CredentialsNotPanel.Controls.Add(this.label8);
             this.CredentialsNotPanel.Location = new System.Drawing.Point(2, 0);
-            this.CredentialsNotPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CredentialsNotPanel.Margin = new System.Windows.Forms.Padding(2);
             this.CredentialsNotPanel.Name = "CredentialsNotPanel";
             this.CredentialsNotPanel.Size = new System.Drawing.Size(521, 307);
             this.CredentialsNotPanel.TabIndex = 7;
             this.CredentialsNotPanel.Visible = false;
             // 
-            // ErrorPopUpPanel
-            // 
-            this.ErrorPopUpPanel.Controls.Add(this.TryAgainButton);
-            this.ErrorPopUpPanel.Controls.Add(this.label7);
-            this.ErrorPopUpPanel.Location = new System.Drawing.Point(7, 2);
-            this.ErrorPopUpPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ErrorPopUpPanel.Name = "ErrorPopUpPanel";
-            this.ErrorPopUpPanel.Size = new System.Drawing.Size(521, 307);
-            this.ErrorPopUpPanel.TabIndex = 6;
-            this.ErrorPopUpPanel.Visible = false;
-            // 
-            // TryAgainButton
-            // 
-            this.TryAgainButton.Location = new System.Drawing.Point(241, 162);
-            this.TryAgainButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.TryAgainButton.Name = "TryAgainButton";
-            this.TryAgainButton.Size = new System.Drawing.Size(83, 30);
-            this.TryAgainButton.TabIndex = 1;
-            this.TryAgainButton.Text = "Try Again";
-            this.TryAgainButton.UseVisualStyleBackColor = true;
-            this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(110, 89);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 24);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Fill all Fields!";
-            // 
             // TryAgain2Button
             // 
             this.TryAgain2Button.Location = new System.Drawing.Point(241, 162);
-            this.TryAgain2Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TryAgain2Button.Margin = new System.Windows.Forms.Padding(2);
             this.TryAgain2Button.Name = "TryAgain2Button";
             this.TryAgain2Button.Size = new System.Drawing.Size(83, 30);
             this.TryAgain2Button.TabIndex = 1;
@@ -246,6 +213,39 @@
             this.label8.Size = new System.Drawing.Size(239, 24);
             this.label8.TabIndex = 0;
             this.label8.Text = "Credentials Not Authorized!";
+            // 
+            // ErrorPopUpPanel
+            // 
+            this.ErrorPopUpPanel.Controls.Add(this.TryAgainButton);
+            this.ErrorPopUpPanel.Controls.Add(this.label7);
+            this.ErrorPopUpPanel.Location = new System.Drawing.Point(7, 2);
+            this.ErrorPopUpPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.ErrorPopUpPanel.Name = "ErrorPopUpPanel";
+            this.ErrorPopUpPanel.Size = new System.Drawing.Size(521, 307);
+            this.ErrorPopUpPanel.TabIndex = 6;
+            this.ErrorPopUpPanel.Visible = false;
+            // 
+            // TryAgainButton
+            // 
+            this.TryAgainButton.Location = new System.Drawing.Point(241, 162);
+            this.TryAgainButton.Margin = new System.Windows.Forms.Padding(2);
+            this.TryAgainButton.Name = "TryAgainButton";
+            this.TryAgainButton.Size = new System.Drawing.Size(83, 30);
+            this.TryAgainButton.TabIndex = 1;
+            this.TryAgainButton.Text = "Try Again";
+            this.TryAgainButton.UseVisualStyleBackColor = true;
+            this.TryAgainButton.Click += new System.EventHandler(this.TryAgainButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(110, 89);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(118, 24);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Fill all Fields!";
             // 
             // panel1
             // 
@@ -278,7 +278,7 @@
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Location = new System.Drawing.Point(5, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(542, 327);
             this.panel1.TabIndex = 8;
@@ -288,7 +288,7 @@
             // 
             this.textBox9.Enabled = false;
             this.textBox9.Location = new System.Drawing.Point(296, 139);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(2);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(89, 20);
             this.textBox9.TabIndex = 28;
@@ -307,7 +307,7 @@
             // 
             this.textBox7.Enabled = false;
             this.textBox7.Location = new System.Drawing.Point(296, 109);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(89, 20);
             this.textBox7.TabIndex = 26;
@@ -326,7 +326,7 @@
             // 
             this.textBox12.Enabled = false;
             this.textBox12.Location = new System.Drawing.Point(296, 76);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(2);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(89, 20);
             this.textBox12.TabIndex = 24;
@@ -345,7 +345,7 @@
             // 
             this.textBox11.Enabled = false;
             this.textBox11.Location = new System.Drawing.Point(86, 206);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(89, 20);
             this.textBox11.TabIndex = 22;
@@ -364,7 +364,7 @@
             // 
             this.textBox10.Enabled = false;
             this.textBox10.Location = new System.Drawing.Point(296, 209);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(2);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(89, 20);
             this.textBox10.TabIndex = 20;
@@ -383,7 +383,7 @@
             // 
             this.textBox8.Enabled = false;
             this.textBox8.Location = new System.Drawing.Point(296, 174);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(2);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(89, 20);
             this.textBox8.TabIndex = 16;
@@ -402,7 +402,7 @@
             // 
             this.FecharInfoButton.BackColor = System.Drawing.Color.Red;
             this.FecharInfoButton.Location = new System.Drawing.Point(424, 8);
-            this.FecharInfoButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FecharInfoButton.Margin = new System.Windows.Forms.Padding(2);
             this.FecharInfoButton.Name = "FecharInfoButton";
             this.FecharInfoButton.Size = new System.Drawing.Size(31, 23);
             this.FecharInfoButton.TabIndex = 1;
@@ -414,7 +414,7 @@
             // 
             this.textBox6.Enabled = false;
             this.textBox6.Location = new System.Drawing.Point(296, 39);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(89, 20);
             this.textBox6.TabIndex = 14;
@@ -433,7 +433,7 @@
             // 
             this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(86, 176);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(89, 20);
             this.textBox5.TabIndex = 12;
@@ -452,7 +452,7 @@
             // 
             this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(86, 141);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(89, 20);
             this.textBox4.TabIndex = 10;
@@ -471,7 +471,7 @@
             // 
             this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(86, 109);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(89, 20);
             this.textBox3.TabIndex = 8;
@@ -490,7 +490,7 @@
             // 
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(86, 76);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(89, 20);
             this.textBox2.TabIndex = 6;
@@ -509,7 +509,7 @@
             // 
             this.textDurabilidade.Enabled = false;
             this.textDurabilidade.Location = new System.Drawing.Point(86, 41);
-            this.textDurabilidade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textDurabilidade.Margin = new System.Windows.Forms.Padding(2);
             this.textDurabilidade.Name = "textDurabilidade";
             this.textDurabilidade.Size = new System.Drawing.Size(89, 20);
             this.textDurabilidade.TabIndex = 4;
@@ -528,7 +528,7 @@
             // 
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(187, 11);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(141, 20);
             this.textBox1.TabIndex = 2;
@@ -551,7 +551,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.CredentialsNotPanel);
             this.panel3.Location = new System.Drawing.Point(5, 4);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(521, 306);
             this.panel3.TabIndex = 2;
@@ -561,7 +561,7 @@
             // 
             this.comboBoxPersonagem.FormattingEnabled = true;
             this.comboBoxPersonagem.Location = new System.Drawing.Point(34, 74);
-            this.comboBoxPersonagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPersonagem.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPersonagem.Name = "comboBoxPersonagem";
             this.comboBoxPersonagem.Size = new System.Drawing.Size(210, 21);
             this.comboBoxPersonagem.TabIndex = 2;
@@ -569,7 +569,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(245, 203);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 29);
             this.button2.TabIndex = 1;
@@ -595,7 +595,7 @@
             this.panel4.Controls.Add(this.listBox3);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Location = new System.Drawing.Point(5, 0);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(552, 329);
             this.panel4.TabIndex = 29;
@@ -607,7 +607,7 @@
             this.AddButon2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.AddButon2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
             this.AddButon2.Location = new System.Drawing.Point(280, 254);
-            this.AddButon2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddButon2.Margin = new System.Windows.Forms.Padding(2);
             this.AddButon2.Name = "AddButon2";
             this.AddButon2.Size = new System.Drawing.Size(61, 22);
             this.AddButon2.TabIndex = 2;
@@ -619,7 +619,7 @@
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.Location = new System.Drawing.Point(180, 50);
-            this.listBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox3.Margin = new System.Windows.Forms.Padding(2);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(162, 199);
             this.listBox3.TabIndex = 1;
@@ -660,7 +660,7 @@
             this.panel2.Controls.Add(this.listBox2);
             this.panel2.Controls.Add(this.Minerar);
             this.panel2.Location = new System.Drawing.Point(8, 8);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(518, 277);
             this.panel2.TabIndex = 1;
@@ -681,7 +681,7 @@
             // textBox13
             // 
             this.textBox13.Location = new System.Drawing.Point(260, 72);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(2);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(70, 20);
             this.textBox13.TabIndex = 18;
@@ -701,7 +701,7 @@
             // 
             this.FilterMund.FormattingEnabled = true;
             this.FilterMund.Location = new System.Drawing.Point(368, 71);
-            this.FilterMund.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FilterMund.Margin = new System.Windows.Forms.Padding(2);
             this.FilterMund.Name = "FilterMund";
             this.FilterMund.Size = new System.Drawing.Size(66, 21);
             this.FilterMund.TabIndex = 16;
@@ -720,7 +720,7 @@
             // AddInvent
             // 
             this.AddInvent.Location = new System.Drawing.Point(9, 70);
-            this.AddInvent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddInvent.Margin = new System.Windows.Forms.Padding(2);
             this.AddInvent.Name = "AddInvent";
             this.AddInvent.Size = new System.Drawing.Size(63, 18);
             this.AddInvent.TabIndex = 14;
@@ -731,7 +731,7 @@
             // infoButton2
             // 
             this.infoButton2.Location = new System.Drawing.Point(438, 93);
-            this.infoButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.infoButton2.Margin = new System.Windows.Forms.Padding(2);
             this.infoButton2.Name = "infoButton2";
             this.infoButton2.Size = new System.Drawing.Size(73, 24);
             this.infoButton2.TabIndex = 13;
@@ -743,7 +743,7 @@
             // NextDayButton
             // 
             this.NextDayButton.Location = new System.Drawing.Point(357, 8);
-            this.NextDayButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NextDayButton.Margin = new System.Windows.Forms.Padding(2);
             this.NextDayButton.Name = "NextDayButton";
             this.NextDayButton.Size = new System.Drawing.Size(111, 31);
             this.NextDayButton.TabIndex = 12;
@@ -754,7 +754,7 @@
             // infoButton
             // 
             this.infoButton.Location = new System.Drawing.Point(189, 93);
-            this.infoButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.infoButton.Margin = new System.Windows.Forms.Padding(2);
             this.infoButton.Name = "infoButton";
             this.infoButton.Size = new System.Drawing.Size(63, 24);
             this.infoButton.TabIndex = 11;
@@ -766,7 +766,7 @@
             // MatarMob
             // 
             this.MatarMob.Location = new System.Drawing.Point(438, 120);
-            this.MatarMob.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MatarMob.Margin = new System.Windows.Forms.Padding(2);
             this.MatarMob.Name = "MatarMob";
             this.MatarMob.Size = new System.Drawing.Size(73, 24);
             this.MatarMob.TabIndex = 9;
@@ -778,7 +778,7 @@
             // SoundButton
             // 
             this.SoundButton.Location = new System.Drawing.Point(472, 8);
-            this.SoundButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SoundButton.Margin = new System.Windows.Forms.Padding(2);
             this.SoundButton.Name = "SoundButton";
             this.SoundButton.Size = new System.Drawing.Size(38, 31);
             this.SoundButton.TabIndex = 8;
@@ -790,7 +790,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(9, 93);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(178, 173);
             this.listBox1.TabIndex = 6;
@@ -810,7 +810,7 @@
             // 
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(122, 70);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(66, 21);
             this.comboBox3.TabIndex = 3;
@@ -831,7 +831,7 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(52, 8);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(92, 21);
             this.comboBox2.TabIndex = 1;
@@ -852,7 +852,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(260, 93);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(175, 173);
             this.listBox2.TabIndex = 7;
@@ -860,7 +860,7 @@
             // Minerar
             // 
             this.Minerar.Location = new System.Drawing.Point(438, 120);
-            this.Minerar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Minerar.Margin = new System.Windows.Forms.Padding(2);
             this.Minerar.Name = "Minerar";
             this.Minerar.Size = new System.Drawing.Size(73, 24);
             this.Minerar.TabIndex = 10;
@@ -880,7 +880,7 @@
             this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.loginPanel.ResumeLayout(false);
