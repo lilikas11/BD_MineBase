@@ -8,14 +8,21 @@ CREATE PROCEDURE create_villager_with_mob (
 AS
 BEGIN
     DECLARE @mob_id INT;
+    	BEGIN TRANSACTION;
+	BEGIN TRY
+			INSERT INTO Mob(Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem)
+			VALUES ('Villager', 'Passiva', @v_id_bioma, 0, 0,0, @v_id_tipo_item, NULL);
 
-    INSERT INTO Mob(Nome, Personalidade, ID_Bioma, Dano_Facil, Dano_Normal, Dano_Dificil, ID_TipoItem, MortoPor_ID_Personagem)
-    VALUES ('Villager', 'Passiva', @v_id_bioma, 0, 0,0, @v_id_tipo_item, NULL);
+			SET @mob_id = SCOPE_IDENTITY();
 
-    SET @mob_id = SCOPE_IDENTITY();
-
-    INSERT INTO Villager(ID_Mob, Trabalho, ID_TipoItem)
-    VALUES (@mob_id, @v_trabalho, @v_id_tipo_item);
+			INSERT INTO Villager(ID_Mob, Trabalho, ID_TipoItem)
+			VALUES (@mob_id, @v_trabalho, @v_id_tipo_item);
+			COMMIT;
+	    END TRY
+	    BEGIN CATCH
+		ROLLBACK;
+		THROW;
+	    END CATCH;
 
 END
 go
@@ -27,6 +34,8 @@ go
 CREATE PROCEDURE EfetuaCompra(@id_personagem int, @id_villager int)
 AS
 BEGIN
+	BEGIN TRANSACTION;
+	BEGIN TRY
     -- Remove a esmeralda
     DELETE FROM Item WHERE ID = (SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81);
 
@@ -35,6 +44,12 @@ BEGIN
     SET @tipoItem = (SELECT ID_TipoItem FROM Villager WHERE ID_Mob = @id_villager);
 
     INSERT INTO Item VALUES (@tipoItem, @id_personagem);
+    		COMMIT;
+	    END TRY
+	    BEGIN CATCH
+		ROLLBACK;
+		THROW;
+	    END CATCH;
 END
 GO
 
@@ -43,6 +58,8 @@ GO
 CREATE PROCEDURE Matar(@id_personagem int, @id_mob int)
 as
 	begin
+	BEGIN TRANSACTION;
+	BEGIN TRY
 		-- matou
 		UPDATE Mob
 		SET ID_Bioma = NULL, MortoPor_ID_Personagem = @id_personagem
@@ -55,6 +72,12 @@ as
 		begin
 			INSERT INTO Item VALUES (@tipoItem, @id_personagem);
 		end
+	    COMMIT;
+	    END TRY
+	    BEGIN CATCH
+		ROLLBACK;
+		THROW;
+	    END CATCH;
 
 	end
 go
