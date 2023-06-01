@@ -110,7 +110,7 @@ CREATE TABLE Villager(
 GO
 
 CREATE TABLE Aquisicao(
-	[ID][int] NOT NULL PRIMARY KEY,
+	[ID][int] identity(1,1) PRIMARY KEY,
 	[ID_Personagem][int] NOT NULL REFERENCES Personagem([ID]),
 	[ID_Villager][int] NOT NULL REFERENCES Villager([ID_Mob]),
 )
