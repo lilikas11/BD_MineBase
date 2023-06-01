@@ -34,10 +34,13 @@ go
 CREATE PROCEDURE EfetuaCompra(@id_personagem int, @id_villager int)
 AS
 BEGIN
-	BEGIN TRANSACTION;
+		BEGIN TRANSACTION;
 	BEGIN TRY
     -- Remove a esmeralda
     DELETE FROM Item WHERE ID = (SELECT TOP 1 ID FROM Item WHERE ID_Personagem = @id_personagem AND ID_TipoItem = 81);
+
+	Insert into Aquisicao values
+		(@id_personagem, @id_villager)
 
     -- tipo item villager
     DECLARE @tipoItem int;
