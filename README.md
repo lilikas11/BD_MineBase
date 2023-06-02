@@ -2,18 +2,25 @@
 
 How to get the database sets:
 
--> execute Schema.sql
 
--> execute Tables.sql
+```
+    -> execute Schema.sql
 
--> execute Indexes.sql
+    -> execute Tables.sql
 
--> execute Trigger.sql
+    -> execute Indexes.sql
 
--> execute Procedures.sql
+    -> execute Trigger.sql
 
--> execute View.sql
+    -> execute Procedures.sql
 
--> execute UDF.sql
+    -> execute View.sql
 
--> execute Inserts.sql
+    -> execute UDF.sql
+
+    -> execute Inserts.sql
+```
+
+## Work done by:
+Lili Ribeiro nº 108713
+Lia Ribeiro nº 107548
