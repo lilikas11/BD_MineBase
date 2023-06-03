@@ -100,32 +100,32 @@ go
 
 -- PassarDia
 CREATE procedure PassarDia(@id_bioma int)
-as
- begin
-	update Mob
-	set ID_Bioma = @id_bioma,
-	MortoPor_ID_Personagem = null
-	where ID_Bioma is null
- end
-go
+AS
+BEGIN
+    declare @mob_id INT;
 
--- adicionar um item, pelo nome porque é unique
-create procedure AddItem(@nome_tipoItem varchar(32), @id_personagem int)
-as
-begin
-	declare @id_item int;
-	select @id_item = @id_tipoItem;
+    declare mob_cursor CURSOR FOR
+    SELECT ID
+    FROM Mob
+    WHERE ID_Bioma IS NULL;
 
-	if @id_item is not null
-	begin
-		insert into Item values
-		(@id_item, @id_personagem)
-	end 
-	else 
-	begin
-		PRINT 'Nao existe esse item'
-	end
-end 
+    OPEN mob_cursor;
+
+    fetch NEXT FROM mob_cursor INTO @mob_id;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        UPDATE Mob
+        SET ID_Bioma = @id_bioma,
+            MortoPor_ID_Personagem = NULL
+        WHERE ID = @mob_id;
+
+        fetch NEXT FROM mob_cursor into @mob_id;
+    END;
+
+    close mob_cursor;
+    deallocate mob_cursor;
+END
 go
 
 -- adicionar Jogador
